@@ -1,23 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
+import FreightNetwork from './components/marketing/FreightNetwork';
+import EmptyReturn from './components/marketing/EmptyReturn';
+import MatchingEngine from './components/marketing/MatchingEngine';
+import MarketplaceSection from './components/marketing/MarketplaceSection';
+import RoleNetworkSection from './components/marketing/RoleNetworkSection';
+import ControlTowerSection from './components/marketing/ControlTowerSection';
+import EnterpriseProcurementSection from './components/marketing/EnterpriseProcurementSection';
+import VehicleIdentitySection from './components/marketing/VehicleIdentitySection';
+import CinematicBreakSection from './components/marketing/CinematicBreakSection';
+import FinalCtaFooterSection from './components/marketing/FinalCtaFooterSection';
+import FreightHero from './components/marketing/FreightHero';
+import MarketingNav from './components/marketing/MarketingNav';
+import { AuthModal } from './components/marketing/AuthModal';
+import React, { useState, useEffect } from 'react';
 import {
   Truck, User, ShieldCheck, MapPin, ArrowRight,
   Bot, X, Upload, CheckCircle2,
   Layers, HelpCircle, Radio, Menu, Crown,
   History, LogOut, Settings, PhoneCall,
-  Info, Camera, Bus, ShoppingBag, Building,
+  Info, Camera, Bus, ShoppingBag,
   AlertTriangle, Package, Clock, QrCode, TrendingDown,
   Activity, ArrowLeft, ChevronDown,
-  Star, PlayCircle, Lock, Search, Flame, Eye, Box, Send, Plus, Check, Award, ChevronRight
+  PlayCircle, Lock, Search, Flame, Eye, Box, Send, Plus, Check
 } from 'lucide-react';
 
 // --- CONSTANTS & MOCK DATA ---
-
-const platformFeatures = [
-  { id: 1, url: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&q=80&w=1600", title: "Enterprise Bidding", subtitle: "Experience zero-commission loads and simplified logistics for businesses.", tag: "CORPORATE" },
-  { id: 2, url: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=1600", title: "Bus Parcel Delivery", subtitle: "Ship small parcels between cities using our reliable inter-city Volvo network.", tag: "NETWORK" },
-  { id: 3, url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1600", title: "Highway Freight Hub", subtitle: "Zero-commission loads for outstation fleets. Maximize your earnings.", tag: "FREIGHT" },
-  { id: 4, url: "https://images.unsplash.com/photo-1586528116311-ad8ed7b66bfc?auto=format&fit=crop&q=80&w=1600", title: "Safe Traffic QR", subtitle: "One scan for Police checks. No physical papers. Absolute peace of mind.", tag: "SECURITY" },
-];
 
 const mandiProducts = [
   { id: 1, name: "Premium Synthetic Engine Oil", type: "Lubricants", price: "4,500", tag: "OEM Certified", stock: "In Stock", img: "https://images.unsplash.com/photo-1635767798638-3e2523d06eb1?auto=format&fit=crop&q=80&w=400" },
@@ -41,229 +47,18 @@ const BackToDashboardBtn = ({ onClick, text }: { onClick: () => void, text: stri
   </div>
 );
 
-// --- PHOTOREALISTIC TATA SIGNA HEAVY CONTAINER LORRY 360° STAGE ---
-const PhotorealisticTataLorry360Stage = ({ theme = 'dark' }: { theme?: 'dark' | 'light' }) => {
-  const [degreeAngle, setDegreeAngle] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-
-  const normAngle = (degreeAngle % 360 + 360) % 360;
-  const rotationRad = (normAngle * Math.PI) / 180;
-  
-  // Smooth Y-axis 3D perspective rotation (Manual drag/tap interaction only)
-  const floatY = Math.sin(rotationRad * 2) * 2;
-  const rotateYDeg = Math.sin(rotationRad) * 32;
-
-  return (
-    <div 
-      className="relative w-full max-w-3xl min-h-[460px] sm:min-h-[520px] flex flex-col items-center justify-center cursor-grab active:cursor-grabbing select-none overflow-visible group"
-      style={{ perspective: '1600px' }}
-      onMouseDown={(e) => { setIsDragging(true); setStartX(e.clientX); }}
-      onMouseMove={(e) => {
-        if (!isDragging) return;
-        const dx = e.clientX - startX;
-        setStartX(e.clientX);
-        setDegreeAngle((prev) => (prev + dx * 0.8) % 360);
-      }}
-      onMouseUp={() => setIsDragging(false)}
-      onMouseLeave={() => setIsDragging(false)}
-      onTouchStart={(e) => { setIsDragging(true); setStartX(e.touches[0].clientX); }}
-      onTouchMove={(e) => {
-        if (!isDragging) return;
-        const dx = e.touches[0].clientX - startX;
-        setStartX(e.touches[0].clientX);
-        setDegreeAngle((prev) => (prev + dx * 0.8) % 360);
-      }}
-      onTouchEnd={() => setIsDragging(false)}
-    >
-      {/* 100% PHOTOREALISTIC TATA HEAVY CONTAINER LORRY (Rests directly on top of the podium disc) */}
-      <div 
-        className="relative z-20 w-full flex flex-col items-center justify-center transition-transform duration-75 ease-out"
-        style={{
-          transform: `translateY(${floatY}px) rotateY(${rotateYDeg}deg)`,
-          transformStyle: 'preserve-3d'
-        }}
-      >
-        <img
-          src="/y2wait_tata_truck_clean_3d_transparent.png"
-          alt="Real Tata Signa Y2WAIT Heavy Container Lorry"
-          className="w-[100%] h-auto max-h-[480px] sm:max-h-[520px] object-contain cursor-pointer transition-transform duration-300 group-hover:scale-105 select-none pointer-events-none"
-          style={{
-            mixBlendMode: 'normal',
-            filter: 'none',
-            opacity: 1
-          }}
-        />
-      </div>
-
-      {/* Realistic Tire Contact Shadow (Tight underneath wheels) */}
-      <div className={`w-[82%] h-4 rounded-full -mt-6 sm:-mt-8 z-10 blur-xs transition-colors duration-500 ${theme === 'dark' ? 'bg-black/95' : 'bg-slate-950/80'}`}></div>
-
-      {/* Unique 3D Metallic Glass Turntable Podium Base (Truck sits flush on top!) */}
-      <div className={`relative w-[95%] sm:w-[92%] h-24 rounded-[100%] border-2 transition-all duration-500 flex items-center justify-center -mt-10 z-0 shadow-2xl ${
-        theme === 'dark'
-          ? 'bg-gradient-to-b from-[#1E293B] via-[#0F172A] to-[#0B0F17] border-[#EA580C]/80 shadow-[0_20px_50px_rgba(234,88,12,0.3)]'
-          : 'bg-gradient-to-b from-[#E2E8F0] via-[#F1F5F9] to-[#CBD5E1] border-[#EA580C] shadow-[0_20px_40px_rgba(234,88,12,0.25)]'
-      }`}>
-        <div className={`w-[85%] h-14 rounded-[100%] border ${theme === 'dark' ? 'border-orange-500/40 bg-slate-900/60' : 'border-orange-500/50 bg-white/60'}`}></div>
-        <div className={`w-[65%] h-8 rounded-[100%] border ${theme === 'dark' ? 'border-amber-400/30' : 'border-amber-500/40'}`}></div>
-        <div className="absolute top-1/2 w-full h-[2px] bg-gradient-to-r from-transparent via-[#EA580C] to-transparent"></div>
-      </div>
-
-      {/* Interactive Control Pill */}
-      <div className={`absolute -bottom-6 z-30 backdrop-blur-md px-4 py-1.5 rounded-full border text-[11px] font-black tracking-wide uppercase flex items-center space-x-2 shadow-lg ${
-        theme === 'dark' ? 'bg-slate-900/90 border-slate-700 text-slate-300' : 'bg-white/90 border-slate-300 text-slate-800'
-      }`}>
-        <span className="w-2 h-2 rounded-full bg-[#EA580C] animate-ping"></span>
-        <span>Drag mouse or swipe to rotate 3D Tata Lorry</span>
-      </div>
-    </div>
-  );
-};
-
-// --- VAHAK & PORTER INSPIRED QUICK SEARCH WIDGET ---
-const HeroQuickLoadSearchWidget = ({ onSearch }: { onSearch: (from: string, to: string, type: string) => void }) => {
-  const [tab, setTab] = useState<'find' | 'post'>('find');
-  const [pickup, setPickup] = useState('Delhi NCR');
-  const [drop, setDrop] = useState('Mumbai');
-  const [vehicle, setVehicle] = useState('32ft MX Container');
-
-  return (
-    <div className="w-full bg-slate-900/90 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.85)] text-white text-left space-y-6">
-      
-      {/* Widget Header & Tabs */}
-      <div className="flex justify-between items-center border-b border-slate-800 pb-4 flex-wrap gap-4">
-        <div className="flex space-x-3">
-          <button
-            type="button"
-            onClick={() => setTab('find')}
-            className={`px-6 py-3 rounded-2xl font-black text-sm transition-all cursor-pointer flex items-center ${tab === 'find' ? 'bg-[#EA580C] text-white shadow-lg shadow-orange-950/50 scale-105' : 'bg-slate-800/80 text-slate-400 hover:text-white'}`}
-          >
-            <Search className="h-4 w-4 mr-2" /> Find Freight Loads
-          </button>
-          <button
-            type="button"
-            onClick={() => setTab('post')}
-            className={`px-6 py-3 rounded-2xl font-black text-sm transition-all cursor-pointer flex items-center ${tab === 'post' ? 'bg-[#EA580C] text-white shadow-lg shadow-orange-950/50 scale-105' : 'bg-slate-800/80 text-slate-400 hover:text-white'}`}
-          >
-            <Truck className="h-4 w-4 mr-2" /> Post Available Fleet
-          </button>
-        </div>
-        <span className="inline-flex items-center text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-full border border-emerald-500/20">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-2"></span> 1,420 Active Loads Online
-        </span>
-      </div>
-
-      {/* Form Inputs Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {/* Pickup City */}
-        <div>
-          <label className="block text-xs font-extrabold text-slate-400 uppercase tracking-wider mb-2">
-            Pickup Origin
-          </label>
-          <div className="relative">
-            <MapPin className="absolute left-4 top-4 h-5 w-5 text-[#EA580C]" />
-            <input
-              type="text"
-              value={pickup}
-              onChange={(e) => setPickup(e.target.value)}
-              placeholder="Enter pickup city"
-              className="w-full bg-slate-800/90 border border-slate-700/80 rounded-2xl pl-12 pr-4 py-3.5 text-white font-bold text-sm focus:border-[#EA580C] focus:outline-none transition-all"
-            />
-          </div>
-        </div>
-
-        {/* Drop City */}
-        <div>
-          <label className="block text-xs font-extrabold text-slate-400 uppercase tracking-wider mb-2">
-            Destination Drop
-          </label>
-          <div className="relative">
-            <MapPin className="absolute left-4 top-4 h-5 w-5 text-teal-400" />
-            <input
-              type="text"
-              value={drop}
-              onChange={(e) => setDrop(e.target.value)}
-              placeholder="Enter destination city"
-              className="w-full bg-slate-800/90 border border-slate-700/80 rounded-2xl pl-12 pr-4 py-3.5 text-white font-bold text-sm focus:border-teal-500 focus:outline-none transition-all"
-            />
-          </div>
-        </div>
-
-        {/* Truck / Cargo Type */}
-        <div>
-          <label className="block text-xs font-extrabold text-slate-400 uppercase tracking-wider mb-2">
-            Truck Body / Cargo Type
-          </label>
-          <div className="relative">
-            <Box className="absolute left-4 top-4 h-5 w-5 text-orange-400" />
-            <select
-              value={vehicle}
-              onChange={(e) => setVehicle(e.target.value)}
-              className="w-full bg-slate-800/90 border border-slate-700/80 rounded-2xl pl-12 pr-8 py-3.5 text-white font-bold text-sm focus:border-[#EA580C] focus:outline-none transition-all appearance-none cursor-pointer"
-            >
-              <option value="32ft MX Container">32ft Multi-Axle Container</option>
-              <option value="24ft Open Body">24ft Open Body Fleet</option>
-              <option value="19ft Eicher Truck">19ft Eicher Truck</option>
-              <option value="Trailer 40ft">40ft Heavy Duty Trailer</option>
-              <option value="Volvo Bus Cargo">Volvo Inter-city Bus Express</option>
-            </select>
-            <ChevronDown className="absolute right-4 top-4 h-5 w-5 text-slate-400 pointer-events-none" />
-          </div>
-        </div>
-      </div>
-
-      {/* Quick City Buttons & CTA */}
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-2">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold text-slate-400">Popular Hubs:</span>
-          {['Delhi ➔ Mumbai', 'Jaipur ➔ Ahmedabad', 'Bengaluru ➔ Chennai'].map((route, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => {
-                const parts = route.split(' ➔ ');
-                setPickup(parts[0]);
-                setDrop(parts[1]);
-              }}
-              className="text-xs font-bold text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700/60 px-3 py-1 rounded-xl transition-all cursor-pointer"
-            >
-              {route}
-            </button>
-          ))}
-        </div>
-
-        <button
-          type="button"
-          onClick={() => onSearch(pickup, drop, vehicle)}
-          className="w-full sm:w-auto bg-[#EA580C] hover:bg-orange-700 text-white font-black px-10 py-4 rounded-2xl text-base shadow-[0_10px_30px_rgba(234,88,12,0.5)] transition-all flex items-center justify-center cursor-pointer hover:scale-105 transform"
-        >
-          {tab === 'find' ? 'Search Matches Now' : 'Post Fleet Instantly'} <ArrowRight className="h-5 w-5 ml-2.5" />
-        </button>
-      </div>
-
-    </div>
-  );
-};
-
 export default function App() {
   // --- APP STATE ---
   const [activeView, setActiveView] = useState<View>('landing');
   const [activeModule, setActiveModule] = useState<ModuleTab>('freight');
   const [listingTab, setListingTab] = useState<ListingTab>('all');
   const [busTab, setBusTab] = useState<ListingTab>('all');
-  const [selectedFeature, setSelectedFeature] = useState<any>(null);
+  const [selectedFeature] = useState<any>(null);
   const [language, setLanguage] = useState<'en' | 'hi'>('en');
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
   const [demoText, setDemoText] = useState("");
 
-  // Dynamic Scroll Truck State
-  const deliverySectionRef = useRef<HTMLDivElement>(null);
-  const roadTrackRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  const [platformStats, setPlatformStats] = useState({ trucks: 0, parcels: 0, verified: 0, cities: 0 });
   const t = (en: string, hi: string) => language === 'en' ? en : hi;
 
   // --- AUTH STATE ---
@@ -283,7 +78,7 @@ export default function App() {
   const [newBus, setNewBus] = useState({ route: '', serviceType: 'Standard', price: '', vehicleNumber: '', capacity: '', productType: '', weight: '' });
   const [newBid, setNewBid] = useState({ demand: '', route: '', initialL1: '' });
 
-  const [siteTheme, setSiteTheme] = useState<'dark' | 'light'>('dark');
+  
   const [negotiationTarget, setNegotiationTarget] = useState<any>(null);
   const [counterOffer, setCounterOffer] = useState('');
 
@@ -301,6 +96,7 @@ export default function App() {
   // Live Production Repositories (Initial empty states, populates from MongoDB API)
   const [driversList, setDriversList] = useState<any[]>([]);
   const [loadsList, setLoadsList] = useState<any[]>([]);
+  const [networkStatus, setNetworkStatus] = useState<'loading' | 'ready' | 'unavailable'>('loading');
   const [busSpaceList, setBusSpaceList] = useState<any[]>([]);
   const [corporateBids, setCorporateBids] = useState<any[]>([]);
 
@@ -321,61 +117,16 @@ export default function App() {
         if (loadsRes && loadsRes.ok) {
           const data = await loadsRes.json();
           setLoadsList(data.loads || data.data || data || []);
+        setNetworkStatus(trucksRes?.ok && loadsRes?.ok ? 'ready' : 'unavailable');
         }
       } catch (err) {
+        setNetworkStatus('unavailable');
         console.error("MongoDB initial fetch error:", err);
       }
     };
 
     fetchRealData();
   }, []);
-
-  // Update platform stats dynamically based on real MongoDB records
-  useEffect(() => {
-    const totalTrucks = driversList.length;
-    const totalLoads = loadsList.length;
-    const verifiedCount = driversList.filter((d: any) => d.verified !== false).length;
-    const uniqueCities = new Set(
-      [...driversList, ...loadsList]
-        .flatMap((i: any) => [i.origin, i.destination, i.currentLoc, i.destLoc])
-        .filter(Boolean)
-    ).size;
-
-    setPlatformStats({
-      trucks: totalTrucks,
-      parcels: totalLoads,
-      verified: verifiedCount,
-      cities: uniqueCities
-    });
-  }, [driversList, loadsList]);
-
-  // Handle Scroll Progress for Highway Truck Roadmap Animation (Bound directly to roadTrackRef)
-  useEffect(() => {
-    const handleScroll = () => {
-      const el = roadTrackRef.current || deliverySectionRef.current;
-      if (!el) return;
-
-      const rect = el.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Start: Top of roadmap track enters viewport (rect.top <= windowHeight * 0.85) => progress = 0.0 (Node 01)
-      // End: Bottom of roadmap track approaches top of viewport (rect.bottom <= windowHeight * 0.25) => progress = 1.0 (Node 04)
-      const startThreshold = windowHeight * 0.85;
-      const endThreshold = windowHeight * 0.25;
-
-      const totalDistance = (startThreshold - endThreshold) + rect.height;
-      const currentScrollPosition = startThreshold - rect.top;
-
-      const rawProgress = currentScrollPosition / totalDistance;
-      const progress = Math.min(Math.max(rawProgress, 0), 1);
-
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeView]);
 
   // Typing effect for demo
   useEffect(() => {
@@ -418,6 +169,22 @@ export default function App() {
   const destLabel = myActiveItem ? (myActiveItem.destination || 'Kolkata') : 'Patna';
 
   // Helper actions
+  // Keep marketing entry points on the existing auth and freight flows.
+  const openFreight = (tab: ListingTab, role?: Exclude<Role, null>) => {
+    setActiveModule('freight');
+    setListingTab(tab);
+    setBookingStep(1);
+    if (isLoggedIn) handlePageChange('dashboard');
+    else {
+      if (role) {
+        setSelectedRole(role);
+        setAuthModal({ open: true, mode: 'register', step: 'details' });
+      } else {
+        setAuthModal({ open: true, mode: 'register', step: 'role' });
+      }
+    }
+  };
+
   const handlePageChange = (v: View) => {
     setActiveView(v);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -478,7 +245,6 @@ export default function App() {
       if (response.ok) {
         const data = await response.json();
         setDriversList([data.truck || data, ...driversList]);
-        setPlatformStats((prev: any) => ({ ...prev, trucks: prev.trucks + 1, cities: prev.cities + 2 }));
         setListingTab('my_listings');
         setNewTruck({ origin: '', dest: '', capacity: '', charges: '', vehicleNumber: '' });
         setBookingStep(1);
@@ -512,7 +278,6 @@ export default function App() {
       if (response.ok) {
         const data = await response.json();
         setLoadsList([data.load || data, ...loadsList]);
-        setPlatformStats((prev: any) => ({ ...prev, parcels: prev.parcels + 1, cities: prev.cities + 2 }));
         setListingTab('my_listings');
         setNewLoad({ material: '', weight: '', origin: '', destination: '', targetPrice: '' });
         setBookingStep(1);
@@ -676,34 +441,9 @@ export default function App() {
     </div>
   );
 
-  // Dynamic Truck Highway position calculations based on scrollProgress
-  // Exact SVG pixel alignment (viewBox 0 0 1000 220) so truck drives directly on the road
-  const calcTruckPosition = (p: number) => {
-    const x = 80 + p * 840; // 80px to 920px
-    let y = 100;
-    let angle = 0;
-
-    if (p < 0.35) {
-      const t = p / 0.35;
-      y = 100 - Math.sin(t * Math.PI) * 45;
-      angle = -Math.cos(t * Math.PI) * 20;
-    } else if (p < 0.75) {
-      const t = (p - 0.35) / 0.4;
-      y = 100 + Math.sin(t * Math.PI) * 45;
-      angle = Math.cos(t * Math.PI) * 20;
-    } else {
-      const t = (p - 0.75) / 0.25;
-      y = 100 - Math.sin(t * Math.PI) * 35;
-      angle = -Math.cos(t * Math.PI) * 15;
-    }
-
-    return { x, y, angle };
-  };
-
-  const truckPos = calcTruckPosition(scrollProgress);
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-[#EA580C] selection:text-white flex flex-col overflow-x-hidden relative">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-[#EA580C] selection:text-white flex flex-col overflow-x-clip relative" style={{ overflowX: 'clip' }}>
 
       {/* 🇮🇳 REAL INDIA MAP WATERMARK */}
       <div className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden">
@@ -715,6 +455,19 @@ export default function App() {
         />
       </div>
 
+      {activeView === 'landing' ? (
+        <MarketingNav
+          loggedIn={isLoggedIn}
+          onHome={() => handlePageChange('landing')}
+          onFind={() => openFreight('all')}
+          onCarriers={() => openFreight('all', 'driver')}
+          onShippers={() => openFreight('my_listings', 'trader')}
+          onEnterprise={() => { setActiveModule('corporate'); if (isLoggedIn) handlePageChange('dashboard'); else { setSelectedRole('corporate'); setAuthModal({ open: true, mode: 'register', step: 'details' }); } }}
+          onSolutions={() => handlePageChange('services')}
+          onSignIn={() => isLoggedIn ? handlePageChange('dashboard') : setAuthModal({ open: true, mode: 'login', step: 'mobile' })}
+          onStart={() => isLoggedIn ? setDrawerOpen(true) : setAuthModal({ open: true, mode: 'register', step: 'role' })}
+        />
+      ) : (<>
       {/* --- TOP ANNOUNCEMENT / UTILITY BAR --- */}
       <div className="bg-[#0B1120] text-slate-300 text-xs font-bold py-2.5 px-6 border-b border-slate-800 z-50">
         <div className="max-w-[1600px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
@@ -761,7 +514,7 @@ export default function App() {
               </div>
             ) : (
               <>
-                <button type="button" onClick={() => setAuthModal({ open: true, mode: 'login', step: 'role' })} className="text-[#0F172A] font-black text-sm hover:text-[#EA580C] transition-colors px-4 cursor-pointer">
+                <button type="button" onClick={() => setAuthModal({ open: true, mode: 'login', step: 'mobile' })} className="text-[#0F172A] font-black text-sm hover:text-[#EA580C] transition-colors px-4 cursor-pointer">
                   Login
                 </button>
                 <button type="button" onClick={() => setAuthModal({ open: true, mode: 'register', step: 'role' })} className="bg-[#EA580C] text-white px-7 py-3 rounded-xl font-black text-sm hover:bg-orange-700 transition-colors shadow-lg shadow-orange-500/20 cursor-pointer">
@@ -773,6 +526,9 @@ export default function App() {
           </div>
         </div>
       </header>
+
+      
+      </>)}
 
       {/* --- DRAWER (Profile & Settings) --- */}
       {drawerOpen && (
@@ -803,7 +559,7 @@ export default function App() {
                     { i: Settings, l: 'Settings', v: 'settings' },
                   ].map((item: any) => (
                     <button type="button" key={item.l} onClick={() => { setDrawerOpen(false); handlePageChange(item.v as View); }} className="w-full flex items-center p-4 text-sm font-black text-slate-700 hover:bg-orange-50 rounded-xl transition-colors group border border-transparent hover:border-orange-100 cursor-pointer">
-                      <item.i className={`h-5 w-5 mr-4 ${item.v === 'dashboard' ? 'text-[#0F172A]' : 'text-slate-400 group-hover:text-[#EA580C]'}`} />
+                      <item.i className={`h-5 w-5 mr-4 ${item.v === 'dashboard' ? 'text-[#0F172A]' : 'text-slate-400 group-hover:text-[#de622b]'}`} />
                       {item.l}
                       {item.s && <span className="ml-auto bg-emerald-100 text-emerald-600 text-[10px] px-2.5 py-1 rounded-full font-black uppercase tracking-wider">{item.s}</span>}
                     </button>
@@ -819,7 +575,7 @@ export default function App() {
                 <Lock className="h-20 w-20 text-slate-300" />
                 <h3 className="text-3xl font-black text-slate-900">Please Login</h3>
                 <p className="text-base text-slate-500 font-medium">Access features by joining the network.</p>
-                <button type="button" onClick={() => { setDrawerOpen(false); setAuthModal({ open: true, mode: 'login', step: 'role' }); }} className="bg-[#EA580C] text-white px-10 py-4 rounded-xl font-black text-lg w-full mt-4 shadow-xl hover:bg-orange-700 transition-colors cursor-pointer">Login Now</button>
+                <button type="button" onClick={() => { setDrawerOpen(false); setAuthModal({ open: true, mode: 'login', step: 'mobile' }); }} className="bg-[#de622b] text-white px-10 py-4 rounded-xl font-black text-lg w-full mt-4 shadow-xl hover:bg-orange-700 transition-colors cursor-pointer">Login Now</button>
               </div>
             )}
           </div>
@@ -827,289 +583,27 @@ export default function App() {
       )}
 
       {/* --- AUTH MODAL --- */}
-      {authModal.open && (
-        <div className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-[#0F172A]/90 backdrop-blur-md animate-fade-in pointer-events-auto">
-          <div className="w-full max-w-4xl bg-white rounded-[2rem] shadow-2xl flex overflow-hidden h-[550px] border border-slate-200 relative">
-            <div className="hidden md:flex w-1/2 relative bg-[#0F172A] flex-col justify-end p-12">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1586528116311-ad8ed7b66bfc?auto=format&fit=crop&q=80&w=800')] bg-cover bg-center opacity-40 mix-blend-overlay"></div>
-              <div className="relative z-10">
-                <h2 className="text-white text-4xl font-black mb-4 leading-tight">Powering the Future of Logistics.</h2>
-                <p className="text-slate-300 text-base font-medium">Seamlessly connect and manage your operations on Y2Wait.</p>
-              </div>
-            </div>
-
-            <div className="w-full md:w-1/2 p-8 sm:p-12 relative flex flex-col justify-center bg-white pointer-events-auto">
-              <button type="button" onClick={() => setAuthModal({ open: false, mode: null, step: 'role' })} className="absolute top-6 right-6 text-slate-400 hover:text-slate-900 bg-slate-50 p-2 rounded-xl border z-50 cursor-pointer"><X className="h-5 w-5" /></button>
-
-              {/* STEP 1: SELECT ROLE */}
-              {authModal.step === 'role' && (
-                <div className="space-y-8 animate-fade-in text-center relative z-20">
-                  <h3 className="text-3xl font-black text-slate-900">{authModal.mode === 'login' ? 'Login to Account' : 'Create an Account'}</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    {[
-                      { role: 'driver', label: 'Driver' },
-                      { role: 'transporter', label: 'Transporter' },
-                      { role: 'trader', label: 'Trader' },
-                      { role: 'corporate', label: 'Corporate' }
-                    ].map((r: any) => (
-                      <button type="button" key={r.role} onClick={() => {
-                        setSelectedRole(r.role as Role);
-                        setAuthModal({ ...authModal, step: authModal.mode === 'register' ? 'details' : 'mobile' });
-                      }} className="p-5 rounded-xl border border-slate-200 bg-white hover:border-[#EA580C] hover:shadow-md transition-all font-black text-slate-700 text-sm shadow-sm hover:text-[#EA580C] cursor-pointer">
-                        {r.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* STEP 2 (CREATE ACCOUNT): ENTER DETAILS */}
-              {authModal.step === 'details' && (
-                <div className="space-y-5 animate-fade-in overflow-y-auto max-h-full pb-4 pr-2 relative z-20">
-                  <h3 className="text-2xl font-black text-slate-900 text-center border-b border-slate-100 pb-4 mb-6">Enter Your Details</h3>
-                  <p className="text-xs text-slate-500 font-bold uppercase tracking-widest text-center mb-4">Role: <span className="text-[#EA580C]">{selectedRole}</span></p>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="First Name" value={user.firstName} onChange={(e: any) => setUser({ ...user, firstName: e.target.value })} className="w-full border border-slate-300 rounded-xl p-3 text-sm font-bold outline-none focus:border-[#EA580C] shadow-inner" />
-                    <input type="text" placeholder="Last Name" value={user.lastName} onChange={(e: any) => setUser({ ...user, lastName: e.target.value })} className="w-full border border-slate-300 rounded-xl p-3 text-sm font-bold outline-none focus:border-[#EA580C] shadow-inner" />
-                  </div>
-
-                  <input type="tel" maxLength={10} placeholder="10-Digit Mobile Number" value={user.mobile} onChange={(e: any) => setUser({ ...user, mobile: e.target.value.replace(/\D/g, '') })} className="w-full border border-slate-300 rounded-xl p-3 text-sm font-bold outline-none focus:border-[#EA580C] shadow-inner" />
-
-                  {(selectedRole === 'trader' || selectedRole === 'corporate' || selectedRole === 'transporter') && (
-                    <input type="text" placeholder="Business / Company Name" value={user.businessName} onChange={(e: any) => setUser({ ...user, businessName: e.target.value })} className="w-full border border-slate-300 rounded-xl p-3 text-sm font-bold outline-none focus:border-[#EA580C] shadow-inner" />
-                  )}
-                  {selectedRole === 'driver' && (
-                    <input type="text" placeholder="Driving License Number" value={user.dl} onChange={(e: any) => setUser({ ...user, dl: e.target.value })} className="w-full border border-slate-300 rounded-xl p-3 text-sm font-bold outline-none focus:border-[#EA580C] shadow-inner" />
-                  )}
-
-                  <input type="password" placeholder="Set a Secure Password" value={user.password} onChange={(e: any) => setUser({ ...user, password: e.target.value })} className="w-full border border-slate-300 rounded-xl p-3 text-sm font-bold outline-none focus:border-[#EA580C] shadow-inner mt-4" />
-
-                  <button type="button" onClick={async () => {
-                    if (!user.firstName || user.mobile.length !== 10 || !user.password) return alert("Please fill all required fields correctly.");
-                    try {
-                      const response = await fetch("https://y2wait-backend.onrender.com/api/auth/register", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          firstName: user.firstName,
-                          lastName: user.lastName,
-                          mobileNum: `${user.mobile}`,
-                          password: user.password,
-                          role: selectedRole,
-                          businessName: user.businessName,
-                          dl: user.dl
-                        })
-                      });
-                      if (response.ok) {
-                        alert("Account Created Successfully! You can now login.");
-                        setAuthModal({ open: false, mode: null, step: 'role' });
-                        setUser({ firstName: '', lastName: '', mobile: '', email: '', password: '', confirmPassword: '', businessName: '', gst: '', dl: '', dp: '' });
-                        handlePageChange('landing');
-                      } else {
-                        const data = await response.json();
-                        const errorMessage = data.message || data.error || "This account already exists! Please log in.";
-                        alert("Registration Failed: " + errorMessage);
-                      }
-                    } catch (error) {
-                      console.error(error);
-                      alert("Could not connect to backend.");
-                    }
-                  }} className="w-full bg-[#EA580C] text-white font-black py-4 rounded-xl shadow-lg mt-6 hover:bg-orange-700 transition-colors text-base cursor-pointer">Create Account</button>
-                </div>
-              )}
-
-              {/* STEP 2 (LOGIN): ENTER MOBILE */}
-              {authModal.step === 'mobile' && (
-                <div className="space-y-8 animate-fade-in text-center relative z-20">
-                  <div className="flex justify-center mb-6"><div className="bg-orange-50 p-5 rounded-full border border-orange-100 shadow-inner"><Lock className="h-10 w-10 text-[#EA580C]" /></div></div>
-                  <h3 className="text-3xl font-black text-slate-900 tracking-tight">Login</h3>
-                  <p className="text-xs text-slate-500 font-bold uppercase tracking-widest border border-slate-200 w-fit mx-auto px-4 py-1.5 rounded-full shadow-sm">Role: <span className="text-[#EA580C]">{selectedRole}</span></p>
-
-                  <input type="tel" maxLength={10} value={user.mobile} onChange={(e: any) => setUser({ ...user, mobile: e.target.value.replace(/\D/g, '') })} placeholder="10-Digit Mobile Number" className="w-full border-2 border-slate-200 rounded-xl p-4 text-center text-xl font-black outline-none focus:border-[#EA580C] shadow-inner" />
-                  <div className="flex flex-col gap-4 pt-2">
-                    <button type="button" onClick={() => setAuthModal({ ...authModal, step: 'password' })} disabled={user.mobile.length !== 10} className="w-full bg-[#0F172A] disabled:bg-slate-300 text-white font-black py-4 rounded-xl transition-colors shadow-lg hover:bg-slate-800 text-lg cursor-pointer">Continue</button>
-                  </div>
-                </div>
-              )}
-
-              {/* STEP 2.5 (LOGIN): ENTER PASSWORD */}
-              {authModal.step === 'password' && (
-                <div className="space-y-6 animate-fade-in text-center relative z-20">
-                  <div className="flex justify-center mb-4"><div className="bg-slate-50 p-4 rounded-full border border-slate-200 shadow-inner"><Lock className="h-8 w-8 text-[#0F172A]" /></div></div>
-                  <h3 className="text-3xl font-black text-slate-900 tracking-tight">Enter Password</h3>
-                  <p className="text-xs text-slate-500 font-bold uppercase tracking-widest border border-slate-200 w-fit mx-auto px-4 py-1.5 rounded-full shadow-sm mb-6">Mobile: <span className="text-[#EA580C]">{user.mobile}</span></p>
-
-                  <input type="password" value={user.password} onChange={(e: any) => setUser({ ...user, password: e.target.value })} placeholder="Secure Password" className="w-full border-2 border-slate-200 rounded-xl p-4 text-center text-xl font-black outline-none focus:border-[#EA580C] shadow-inner" />
-
-                  <div className="flex justify-end mt-1 mb-2 pr-2">
-                    <button
-                      type="button"
-                      onClick={() => setAuthModal({ ...authModal, step: 'forgot_phone' })}
-                      className="text-sm font-bold text-[#EA580C] hover:text-orange-700 hover:underline transition-all cursor-pointer"
-                    >
-                      Forgot Password?
-                    </button>
-                  </div>
-
-                  <div className="flex flex-col gap-4 pt-2">
-                    <button type="button" onClick={async () => {
-                      try {
-                        const response = await fetch("https://y2wait-backend.onrender.com/api/auth/send-otp", {
-                          method: "POST",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ mobileNum: `${user.mobile}`, password: user.password, role: selectedRole })
-                        });
-                        if (response.ok) {
-                          setAuthModal({ ...authModal, step: 'otp' });
-                        } else {
-                          const data = await response.json();
-                          alert("Error: " + (data.error || data.message || JSON.stringify(data)));
-                        }
-                      } catch (error) {
-                        console.error(error);
-                        alert("Could not connect to backend.");
-                      }
-                    }} disabled={!user.password} className="w-full bg-[#EA580C] disabled:bg-slate-300 text-white font-black py-4 rounded-xl transition-colors shadow-lg hover:bg-orange-700 text-lg cursor-pointer">Verify & Send OTP</button>
-                  </div>
-                </div>
-              )}
-
-              {/* FORGOT PASSWORD - STEP 1 */}
-              {authModal.step === 'forgot_phone' && (
-                <div className="space-y-6 animate-fade-in text-center relative z-20">
-                  <h3 className="text-3xl font-black text-slate-900 tracking-tight mb-2">Reset Password</h3>
-                  <p className="text-sm text-slate-500 font-bold mb-6">Enter your registered mobile number to receive an OTP.</p>
-
-                  <input type="tel" maxLength={10} value={user.mobile} onChange={(e: any) => setUser({ ...user, mobile: e.target.value.replace(/\D/g, '') })} placeholder="10-Digit Mobile Number" className="w-full border-2 border-slate-200 rounded-xl p-4 text-center text-xl font-black outline-none focus:border-[#EA580C] shadow-inner" />
-
-                  <button type="button" onClick={async () => {
-                    if (user.mobile.length !== 10) return alert("Please enter a valid 10-digit number.");
-                    try {
-                      const response = await fetch("https://y2wait-backend.onrender.com/api/auth/forgot-password-otp", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ mobileNum: user.mobile, role: selectedRole })
-                      });
-                      if (response.ok) {
-                        setAuthModal({ ...authModal, step: 'forgot_otp' });
-                      } else {
-                        const data = await response.json();
-                        alert("Error: " + (data.error || data.message));
-                      }
-                    } catch (error) {
-                      console.error(error);
-                      alert("Could not connect to backend.");
-                    }
-                  }} disabled={user.mobile.length !== 10} className="w-full bg-[#0F172A] disabled:bg-slate-300 text-white font-black py-4 rounded-xl transition-colors shadow-lg hover:bg-slate-800 text-lg mt-4 cursor-pointer">Send Reset OTP</button>
-
-                  <button type="button" onClick={() => setAuthModal({ ...authModal, step: 'password' })} className="w-full text-sm font-bold text-slate-500 hover:text-slate-900 mt-2 cursor-pointer">Back to Login</button>
-                </div>
-              )}
-
-              {/* FORGOT PASSWORD - STEP 2 */}
-              {authModal.step === 'forgot_otp' && (
-                <div className="space-y-6 animate-fade-in text-center relative z-20">
-                  <h3 className="text-3xl font-black text-slate-900 tracking-tight mb-2">Enter OTP</h3>
-                  <p className="text-sm text-slate-500 font-bold mb-6">Enter the OTP sent to <span className="text-[#EA580C]">{user.mobile}</span></p>
-
-                  <input
-                    type="text"
-                    maxLength={6}
-                    value={user.otp}
-                    onChange={(e: any) => setUser({ ...user, otp: e.target.value.replace(/\D/g, '') })}
-                    placeholder="Enter 6-Digit OTP"
-                    className="w-full border-2 border-slate-200 rounded-xl p-4 text-center text-xl font-bold tracking-normal outline-none focus:border-[#EA580C] focus:tracking-[0.3em] transition-all shadow-inner"
-                  />
-
-                  <button type="button" onClick={async () => {
-                    if (!user.otp || user.otp.length < 4) return alert("Please enter the complete OTP.");
-                    setAuthModal({ ...authModal, step: 'forgot_new_password' });
-                  }} disabled={!user.otp} className="w-full bg-[#0F172A] disabled:bg-slate-300 text-white font-black py-4 rounded-xl transition-colors shadow-lg hover:bg-slate-800 text-lg mt-4 cursor-pointer">Verify OTP</button>
-                </div>
-              )}
-
-              {/* FORGOT PASSWORD - STEP 3 */}
-              {authModal.step === 'forgot_new_password' && (
-                <div className="space-y-6 animate-fade-in text-center relative z-20">
-                  <h3 className="text-3xl font-black text-slate-900 tracking-tight mb-2">Create New Password</h3>
-
-                  <input type="password" value={user.password} onChange={(e: any) => setUser({ ...user, password: e.target.value })} placeholder="New Password" className="w-full border-2 border-slate-200 rounded-xl p-4 text-center text-xl font-bold outline-none focus:border-[#EA580C] shadow-inner" />
-
-                  <input type="password" value={user.confirmPassword} onChange={(e: any) => setUser({ ...user, confirmPassword: e.target.value })} placeholder="Confirm New Password" className="w-full border-2 border-slate-200 rounded-xl p-4 text-center text-xl font-bold outline-none focus:border-[#EA580C] shadow-inner" />
-
-                  <button type="button" onClick={async () => {
-                    if (user.password !== user.confirmPassword) return alert("Passwords do not match!");
-                    if (user.password.length < 6) return alert("Password must be at least 6 characters.");
-
-                    try {
-                      const response = await fetch("https://y2wait-backend.onrender.com/api/auth/reset-password", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          mobileNum: user.mobile,
-                          otp: user.otp,
-                          newPassword: user.password,
-                          role: selectedRole
-                        })
-                      });
-                      if (response.ok) {
-                        alert("Password reset successfully! Please login with your new password.");
-                        setUser({ ...user, password: '', confirmPassword: '', otp: '' });
-                        setAuthModal({ ...authModal, step: 'password' });
-                      } else {
-                        const data = await response.json();
-                        alert("Error: " + (data.error || data.message));
-                      }
-                    } catch (error) {
-                      console.error(error);
-                      alert("Could not connect to backend.");
-                    }
-                  }} disabled={!user.password || !user.confirmPassword} className="w-full bg-[#EA580C] disabled:bg-slate-300 text-white font-black py-4 rounded-xl transition-colors shadow-lg hover:bg-orange-700 text-lg mt-4 cursor-pointer">Update Password</button>
-                </div>
-              )}
-
-              {/* STEP 3 (LOGIN): VERIFY OTP */}
-              {authModal.step === 'otp' && (
-                <div className="space-y-6 animate-fade-in text-center relative z-20">
-                  <h3 className="text-3xl font-black text-slate-900 tracking-tight mb-2">Enter OTP</h3>
-                  <p className="text-xs text-slate-500 font-bold bg-slate-50 py-3 rounded-xl border border-slate-100 tracking-widest mb-6">OTP sent to {user.mobile}</p>
-                  <input
-                    type="text"
-                    maxLength={4}
-                    value={otpVal}
-                    onChange={(e: any) => setOtpVal(e.target.value.replace(/\D/g, ''))}
-                    placeholder="Enter OTP"
-                    className="w-full border-2 border-slate-200 rounded-xl p-4 text-center text-2xl font-bold tracking-normal outline-none focus:border-[#EA580C] focus:tracking-[0.3em] transition-all shadow-inner mt-4"
-                  />
-                  <button type="button" onClick={async () => {
-                    if (otpVal.length !== 4) return;
-                    try {
-                      const response = await fetch("https://y2wait-backend.onrender.com/api/auth/verify-otp", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          mobileNum: user.mobile,
-                          otp: otpVal
-                        })
-                      });
-                      if (response.ok) {
-                        executeLogin();
-                      } else {
-                        alert("Invalid OTP! Please try again.");
-                      }
-                    } catch (error) {
-                      console.error(error);
-                      alert("Could not connect to backend.");
-                    }
-                  }} disabled={otpVal.length !== 4} className="w-full bg-[#EA580C] disabled:bg-slate-300 text-white font-black py-4 rounded-xl shadow-lg mt-6 transition-colors text-base cursor-pointer">Verify & Login</button>
-                </div>
-              )}
-
-            </div>
-          </div>
-        </div>
-      )}
+      <AuthModal
+        isOpen={authModal.open}
+        mode={authModal.mode}
+        step={authModal.step}
+        selectedRole={selectedRole}
+        user={user}
+        otpVal={otpVal}
+        onClose={() => setAuthModal({ open: false, mode: null, step: 'role' })}
+        onSelectRole={(role) => setSelectedRole(role)}
+        onChangeMode={(mode) => setAuthModal((prev) => ({ ...prev, mode }))}
+        onChangeStep={(step) => setAuthModal((prev) => ({ ...prev, step }))}
+        onUserChange={(updatedUser) => setUser(updatedUser)}
+        setOtpVal={(otp) => setOtpVal(otp)}
+        onLoginSuccess={() => executeLogin()}
+        onRegisterSuccess={() => {
+          alert("Account Created Successfully! You can now access the network.");
+          setAuthModal({ open: false, mode: null, step: 'role' });
+          setUser({ firstName: '', lastName: '', mobile: '', email: '', password: '', confirmPassword: '', otp: '', businessName: '', gst: '', dl: '', dp: '' });
+          handlePageChange('landing');
+        }}
+      />
 
       {/* --- DEMO OVERLAY --- */}
       {showDemo && (
@@ -1132,739 +626,90 @@ export default function App() {
         {/* LANDING VIEW */}
         {activeView === 'landing' && (
           <>
-            {/* ======================================================== */}
-            {/* HERO SECTION (INSPIRED BY CARRYON LOGISTICS THEME) */}
-            {/* ======================================================== */}
-            {/* ======================================================== */}
-            {/* HERO SECTION (360° Y2WAIT TRUCK & VAHAK-INSPIRED LAYOUT) */}
-            {/* ======================================================== */}
-            {/* ======================================================== */}
-            {/* HERO SECTION (CARRYON LOGISTICS THEME FORMAT) */}
-            {/* ======================================================== */}
-            {/* ======================================================== */}
-            {/* HERO SECTION (CARRYON LOGISTICS THEME FORMAT WITH Y2WAIT OVAL LOGO BADGE) */}
-            {/* ======================================================== */}
-            <section className={`relative w-full transition-colors duration-500 pt-12 pb-36 overflow-hidden border-b-8 border-[#EA580C] ${siteTheme === 'dark' ? 'hero-carryon-container-dark text-white' : 'hero-carryon-container-light text-slate-900'}`}>
-              
-              {/* Theme Mode Switcher Floating Button */}
-              <div className="absolute top-6 right-8 z-30">
-                <button
-                  type="button"
-                  onClick={() => setSiteTheme(siteTheme === 'dark' ? 'light' : 'dark')}
-                  className="bg-slate-900/80 backdrop-blur-md text-white border border-slate-700 px-5 py-2.5 rounded-full text-xs font-black flex items-center space-x-2 shadow-xl hover:border-[#EA580C] transition-all cursor-pointer"
-                >
-                  {siteTheme === 'dark' ? (
-                    <><span>☀️</span> <span>Light Theme</span></>
-                  ) : (
-                    <><span>🌙</span> <span>Dark Theme</span></>
-                  )}
-                </button>
-              </div>
+            <FreightHero onPost={() => openFreight('my_listings', 'trader')} onFind={() => openFreight('all')} />
 
-              <div className="max-w-[1600px] mx-auto px-6 sm:px-12 relative z-20 space-y-12 text-center">
-                
-                {/* Centered Headline Header Block */}
-                <div className="max-w-4xl mx-auto space-y-6">
-                  <div className="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-md border border-white/15 px-6 py-2.5 rounded-full text-xs font-black tracking-widest uppercase text-[#EA580C] shadow-lg">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#EA580C] animate-ping mr-1"></span>
-                    <span>{t("INDIA'S #1 3D FREIGHT MATCHMAKING GRID", "भारत का नंबर 1 3D फ्रेट ग्रिड")}</span>
-                  </div>
+            <FreightNetwork loads={loadsList} trucks={driversList} status={networkStatus} />
+            <EmptyReturn />
+            <MatchingEngine onFind={() => openFreight('all')} />
 
-                  <h1 className="text-5xl sm:text-7xl font-black leading-[1.05] tracking-tight font-heading drop-shadow-2xl">
-                    {t("Empowering", "सशक्त बनाना")}{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-[#EA580C] to-red-500">
-                      {t("Transporters.", "ट्रांसपोर्टर्स।")}
-                    </span>{" "}
-                    <span className={siteTheme === 'dark' ? 'text-white' : 'text-slate-900'}>{t("Pure Profits.", "प्योर प्रॉफिट्स।")}</span>
-                  </h1>
+            {/* 05 THE MARKETPLACE */}
+            <MarketplaceSection
+              onPost={() => openFreight('my_listings', 'trader')}
+              onFind={(corridor?: string) => {
+                if (corridor) setFreightSearch(corridor);
+                openFreight('all');
+              }}
+            />
 
-                  <p className={`text-lg sm:text-xl font-medium max-w-3xl mx-auto leading-relaxed ${siteTheme === 'dark' ? 'text-slate-300' : 'text-slate-600'}`}>
-                    {t(
-                      "Create instant direct matches for outstation Indian truck fleets, instant bus cargo delivery, reverse bidding & Safe Traffic QR.",
-                      "सीधे जुड़ें। 3D ट्रक नेटवर्क, इंस्टेंट बस पार्सल डिलीवरी एवं सेफ ट्रैफिक QR।"
-                    )}
-                  </p>
+            {/* 06 BUILT FOR EVERY SIDE */}
+            <RoleNetworkSection
+              onShipper={() => openFreight('my_listings', 'trader')}
+              onDriver={() => openFreight('all', 'driver')}
+              onFleet={() => openFreight('all', 'transporter')}
+              onEnterprise={() => {
+                setActiveModule('corporate');
+                if (isLoggedIn) handlePageChange('dashboard');
+                else {
+                  setSelectedRole('corporate');
+                  setAuthModal({ open: true, mode: 'register', step: 'details' });
+                }
+              }}
+            />
 
-                  <div className="flex flex-wrap justify-center gap-5 pt-2">
-                    <button
-                      type="button"
-                      onClick={() => setAuthModal({ open: true, mode: 'register', step: 'role' })}
-                      className="bg-[#EA580C] text-white px-9 py-5 rounded-2xl font-black text-lg hover:bg-orange-700 transition-all shadow-[0_10px_30px_rgba(234,88,12,0.5)] flex items-center group cursor-pointer hover:scale-105 transform"
-                    >
-                      {t("Get Started Now", "शुरू करें")} <ArrowRight className="h-6 w-6 ml-3 group-hover:translate-x-1.5 transition-transform" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setShowDemo(true)}
-                      className={`backdrop-blur-md border px-8 py-5 rounded-2xl font-black text-lg transition-all flex items-center cursor-pointer hover:scale-105 transform ${siteTheme === 'dark' ? 'bg-white/10 text-white border-white/20 hover:bg-white/20' : 'bg-slate-900 text-white border-slate-800 hover:bg-slate-800'}`}
-                    >
-                      <PlayCircle className="h-6 w-6 mr-3 text-[#EA580C]" /> {t("Watch Live Demo", "डेमो देखें")}
-                    </button>
-                  </div>
-                </div>
+            {/* 07 CONTROL TOWER */}
+            <ControlTowerSection
+              onOpenDashboard={() => {
+                if (isLoggedIn) handlePageChange('dashboard');
+                else setAuthModal({ open: true, mode: 'login', step: 'mobile' });
+              }}
+            />
 
-                {/* 3-Column Showcase: Left Y2WAIT Logo & Smart Logistics Card + Center 3D Tata Lorry + Right Fleet Card */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-6">
-                  
-                  {/* Left Column: Floating Oval Badge (Official Y2Wait Logo) & Rounded Square Card */}
-                  <div className="lg:col-span-3 text-left space-y-6">
-                    
-                    {/* Floating Oval Badge with Official Y2WAIT Logo */}
-                    <div className="inline-flex items-center space-x-3 bg-slate-900/90 backdrop-blur-md px-6 py-3 rounded-full border-2 border-[#EA580C] shadow-[0_10px_25px_rgba(234,88,12,0.3)]">
-                      <div className="w-9 h-9 rounded-full bg-[#EA580C] flex items-center justify-center text-white shadow-md">
-                        <Truck className="h-5 w-5" />
-                      </div>
-                      <span className="text-2xl font-black text-white tracking-tight font-heading">
-                        Y2<span className="text-[#EA580C]">Wait</span>
-                      </span>
-                    </div>
+            {/* 08 ENTERPRISE PROCUREMENT */}
+            <EnterpriseProcurementSection
+              onProcure={() => {
+                setActiveModule('corporate');
+                if (isLoggedIn) handlePageChange('dashboard');
+                else {
+                  setSelectedRole('corporate');
+                  setAuthModal({ open: true, mode: 'register', step: 'details' });
+                }
+              }}
+              onExplore={() => openFreight('all')}
+            />
 
-                    {/* Cornered Square Card */}
-                    <div className="bg-slate-900/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-5 hover:border-[#EA580C]/60 transition-colors">
-                      <div className="w-12 h-12 rounded-2xl bg-[#EA580C]/20 border border-[#EA580C]/40 flex items-center justify-center text-[#EA580C]">
-                        <Box className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-black text-white">Smart Logistics Solutions</h3>
-                        <p className="text-xs text-slate-400 font-bold mt-2 leading-relaxed">Manage your complex freight logistics effortlessly with 100% verified outstation trucks & direct matching.</p>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => setAuthModal({ open: true, mode: 'register', step: 'role' })}
-                        className="w-full bg-[#EA580C] hover:bg-orange-700 text-white font-black py-3 rounded-xl text-xs transition-colors cursor-pointer shadow-lg"
-                      >
-                        Find Freight Loads ➔
-                      </button>
-                    </div>
-                  </div>
+            {/* 09 VEHICLE IDENTITY & SAFE QR */}
+            <VehicleIdentitySection
+              onVerify={() => {
+                handlePageChange('safe_qr');
+              }}
+            />
 
-                  {/* Centerpiece: Photorealistic Tata Signa Y2WAIT Heavy Lorry 360° Stage */}
-                  <div className="lg:col-span-6 relative flex flex-col justify-center items-center">
-                    <PhotorealisticTataLorry360Stage theme={siteTheme} />
-                  </div>
+            {/* 10 CINEMATIC BREAK */}
+            <CinematicBreakSection />
 
-                  {/* Right Column: Fleet Management Card */}
-                  <div className="lg:col-span-3 text-left bg-slate-900/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-6 hover:border-teal-500/60 transition-colors">
-                    <div className="w-12 h-12 rounded-2xl bg-teal-500/20 border border-teal-500/40 flex items-center justify-center text-teal-400">
-                      <ShieldCheck className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-black text-white">Safe Traffic QR & Fleet</h3>
-                      <p className="text-xs text-slate-400 font-bold mt-1 leading-relaxed">Police-verified GPS trip telemetry, digital waybills & instantaneous load matching across 28 States & UTs.</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setAuthModal({ open: true, mode: 'register', step: 'role' })}
-                      className="w-full bg-slate-800 hover:bg-teal-600 text-white font-black py-3 rounded-xl text-xs transition-colors cursor-pointer"
-                    >
-                      Post Available Fleet ➔
-                    </button>
-                  </div>
-
-                </div>
-
-                {/* Trust Badges Bar */}
-                <div className={`pt-8 border-t flex flex-wrap justify-center items-center gap-10 text-xs font-bold ${siteTheme === 'dark' ? 'border-slate-800/80 text-slate-400' : 'border-slate-300 text-slate-600'}`}>
-                  <span className="flex items-center">
-                    <ShieldCheck className="h-5 w-5 text-emerald-400 mr-2" /> 100% KYC Verified Drivers
-                  </span>
-                  <span className="flex items-center">
-                    <Award className="h-5 w-5 text-orange-400 mr-2" /> Direct Load Matching Guarantee
-                  </span>
-                  <span className="flex items-center">
-                    <Radio className="h-5 w-5 text-teal-400 mr-2 animate-pulse" /> Live Telemetry Radar
-                  </span>
-                </div>
-
-                {/* Vahak & Porter Inspired Quick Search & Post Bar */}
-                <div className="pt-4">
-                  <HeroQuickLoadSearchWidget
-                    onSearch={(pickup, drop, vehicle) => {
-                      setNewLoad({ ...newLoad, origin: pickup, destination: drop, material: vehicle });
-                      setAuthModal({ open: true, mode: 'register', step: 'role' });
-                    }}
-                  />
-                </div>
-
-              </div>
-            </section>
-
-            {/* LIVE PLATFORM STATS COUNTER STRIP */}
-            <section className="max-w-[1400px] mx-auto px-6 relative z-30 -mt-16 mb-28">
-              <div className="bg-white rounded-[2.5rem] shadow-2xl border border-slate-200 p-8 sm:p-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-100 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-orange-50 rounded-full blur-[80px] -z-10"></div>
-                {[
-                  { i: Truck, c: platformStats.trucks, l: 'Trucks Listed' },
-                  { i: Package, c: platformStats.parcels, l: 'Parcels Shipped' },
-                  { i: ShieldCheck, c: platformStats.verified, l: 'Verified Drivers' },
-                  { i: MapPin, c: platformStats.cities, l: 'Cities Covered' }
-                ].map((stat: any, i: number) => (
-                  <div key={stat.l} className={`flex-1 ${i === 0 ? '' : 'md:pl-8'} ${i > 1 ? 'pt-6 md:pt-0' : ''}`}>
-                    <div className={`text-4xl sm:text-5xl font-black ${i % 2 === 0 ? 'text-[#EA580C]' : 'text-[#0F172A]'} flex items-center justify-center mb-2`}><stat.i className="h-9 w-9 mr-3 shrink-0 text-[#EA580C]" /> {stat.c}+</div>
-                    <div className="text-xs text-slate-500 font-black uppercase tracking-widest leading-tight">{stat.l}</div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* ======================================================== */}
-            {/* SECTION 1: WE SPECIALISE IN TRANSPORTATION (TRANSPI SCREENSHOT 2) */}
-            {/* ======================================================== */}
-            <section className="max-w-[1600px] mx-auto px-6 sm:px-12 py-16 mb-28">
-              <div className="grid lg:grid-cols-12 gap-16 items-center">
-                
-                {/* Left Side: Overlapping Oval / Arch Photo Frames */}
-                <div className="lg:col-span-6 relative flex justify-center items-center">
-                  <div className="relative w-full max-w-lg h-[460px] sm:h-[520px]">
-                    
-                    {/* Primary Oval Frame */}
-                    <div className="absolute top-0 left-0 w-[55%] h-[85%] overflow-hidden mask-oval border-4 border-white shadow-2xl bg-slate-200 z-20 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
-                      <img src="https://images.unsplash.com/photo-1586528116311-ad8ed7b66bfc?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover scale-110" alt="Logistics Professional" />
-                    </div>
-
-                    {/* Secondary Arch Frame */}
-                    <div className="absolute bottom-0 right-0 w-[60%] h-[82%] overflow-hidden mask-arch border-4 border-white shadow-2xl bg-slate-300 z-10 transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                      <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" alt="Fleet Vehicle" />
-                    </div>
-
-                    {/* Red Accent Decorative Circle Badge */}
-                    <div className="absolute top-1/2 right-1/4 transform translate-x-1/2 -translate-y-1/2 bg-[#EA580C] text-white p-6 rounded-full shadow-2xl z-30 flex flex-col items-center justify-center border-4 border-white animate-bounce" style={{ animationDuration: '6s' }}>
-                      <Award className="h-9 w-9 mb-1" />
-                      <span className="text-[10px] font-black tracking-widest uppercase">Certified</span>
-                    </div>
-
-                  </div>
-                </div>
-
-                {/* Right Side: Specialized Capabilities Content */}
-                <div className="lg:col-span-6 space-y-8 text-left">
-                  <span className="text-[#EA580C] font-black text-xs uppercase tracking-widest bg-orange-50 px-4 py-2 rounded-full border border-orange-100 inline-block">
-                    WE SPECIALISE IN THE TRANSPORTATION
-                  </span>
-
-                  <h2 className="text-4xl sm:text-5xl font-black text-[#0F172A] leading-tight tracking-tight">
-                    Manage your Complex Logistics with Speed & Focus
-                  </h2>
-
-                  <p className="text-slate-600 text-lg font-medium leading-relaxed">
-                    Y2Wait is India's leading worldwide freight matchmaking platform. We uphold industry standards and simplify the trade of commercial merchandise, heavy freight, and inter-city express cargo across the nation.
-                  </p>
-
-                  {/* Bullet Matrix */}
-                  <div className="grid grid-cols-2 gap-y-4 gap-x-6 pt-4 text-sm font-bold text-slate-800">
-                    {[
-                      'Outstation Heavy Freight', 'Inter-city Bus Express',
-                      'Automotive & Spare Parts', 'Cold Chain & Agricultural',
-                      'Enterprise Corporate Bids', 'Fashion & Consumer Retail'
-                    ].map((item: string) => (
-                      <div key={item} className="flex items-center space-x-3">
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#EA580C] shrink-0"></div>
-                        <span className="text-slate-800 font-bold">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="pt-6">
-                    <button type="button" onClick={() => setAuthModal({ open: true, mode: 'register', step: 'role' })} className="bg-[#EA580C] hover:bg-orange-700 text-white font-black px-10 py-4.5 rounded-2xl shadow-xl transition-all flex items-center cursor-pointer group hover:scale-105 transform">
-                      Discover More <ArrowRight className="h-5 w-5 ml-3 group-hover:translate-x-1.5 transition-transform" />
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-            </section>
-
-            {/* ======================================================== */}
-            {/* SECTION 2: SPECIALIST LOGISTICS SERVICES (TRANSPI SCREENSHOT 3) */}
-            {/* ======================================================== */}
-            <section className="bg-slate-100/80 py-28 px-6 border-y border-slate-200">
-              <div className="max-w-[1600px] mx-auto space-y-16 text-left">
-                
-                <div className="text-center max-w-3xl mx-auto space-y-4">
-                  <span className="text-[#EA580C] font-black text-xs uppercase tracking-widest bg-white px-5 py-2 rounded-full border border-slate-200 shadow-sm inline-block">
-                    SHIPPING SERVICES
-                  </span>
-                  <h2 className="text-4xl sm:text-5xl font-black text-[#0F172A] tracking-tight">
-                    Specialist Y2Wait Logistics Solutions
-                  </h2>
-                  <p className="text-slate-500 font-medium text-lg">
-                    Tailored freight and transport solutions designed to streamline supply chains for every stakeholder.
-                  </p>
-                </div>
-
-                {/* 3 Asymmetric Service Cards */}
-                <div className="grid md:grid-cols-3 gap-10">
-                  {[
-                    {
-                      title: 'Express Bus Transportation',
-                      desc: 'Ship small to medium parcels between cities using our reliable inter-city Volvo bus network with guaranteed same-day dispatch.',
-                      img: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=800',
-                      icon: Bus,
-                      tag: 'EXPRESS CARGO'
-                    },
-                    {
-                      title: 'Road Outstation Freight',
-                      desc: 'Zero-commission direct matchmaking for outstation trucks. Find high-value return loads and maximize revenue.',
-                      img: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=800',
-                      icon: Truck,
-                      tag: 'HEAVY TRUCKS'
-                    },
-                    {
-                      title: 'Bulk Enterprise Auctions',
-                      desc: 'Transparent reverse bidding platform for corporate freight demands, ensuring lowest L1 cost and verified vehicle dispatch.',
-                      img: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&q=80&w=800',
-                      icon: Building,
-                      tag: 'CORPORATE'
-                    }
-                  ].map((service: any) => (
-                    <div key={service.title} className="bg-white rounded-[2.5rem] card-cut-corner border border-slate-200 overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group flex flex-col justify-between hover:-translate-y-2">
-                      <div>
-                        {/* Image Header with Asymmetric Crop */}
-                        <div className="h-64 relative overflow-hidden">
-                          <img src={service.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={service.title} />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-60"></div>
-                          <span className="absolute top-6 left-6 bg-[#0F172A]/80 backdrop-blur-md text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest border border-white/20">
-                            {service.tag}
-                          </span>
-
-                          {/* Floating Orange Icon Circle */}
-                          <div className="absolute -bottom-7 right-8 bg-[#EA580C] text-white p-4 rounded-full shadow-2xl border-4 border-white group-hover:scale-110 transition-transform">
-                            <service.icon className="h-7 w-7" />
-                          </div>
-                        </div>
-
-                        <div className="p-8 pt-10 space-y-4">
-                          <h3 className="text-2xl font-black text-slate-900 group-hover:text-[#EA580C] transition-colors">{service.title}</h3>
-                          <p className="text-slate-600 text-sm font-medium leading-relaxed">{service.desc}</p>
-                        </div>
-                      </div>
-
-                      <div className="p-8 pt-0">
-                        <button type="button" onClick={() => setAuthModal({ open: true, mode: 'register', step: 'role' })} className="text-xs font-black text-slate-900 group-hover:text-[#EA580C] uppercase tracking-widest flex items-center pt-4 border-t border-slate-100 w-full cursor-pointer">
-                          READ MORE <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-              </div>
-            </section>
-
-            {/* ======================================================== */}
-            {/* SECTION 3: Y2WAIT PAN-INDIA FREIGHT CORRIDOR */}
-            {/* ======================================================== */}
-            <section ref={deliverySectionRef} className="py-32 bg-[#0B1120] text-white relative overflow-hidden border-b border-slate-800">
-              
-              {/* Background ambient lighting glows */}
-              <div className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#EA580C]/15 rounded-full blur-[180px] pointer-events-none"></div>
-              <div className="absolute top-1/2 right-1/4 transform translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#06B6D4]/15 rounded-full blur-[180px] pointer-events-none"></div>
-
-              <div className="max-w-[1600px] mx-auto px-6 sm:px-12 relative z-20 text-center space-y-16">
-                
-                <div className="max-w-4xl mx-auto space-y-4">
-                  <span className="text-[#EA580C] font-black text-xs uppercase tracking-widest bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/15 inline-block shadow-lg">
-                    ALL-INDIA FREIGHT MATCHMAKING NETWORK
-                  </span>
-                  <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tight font-heading">
-                    Connecting Freight Seamlessly <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-[#EA580C] to-teal-400">Across All of India</span>
-                  </h2>
-                  <p className="text-slate-300 font-medium text-lg max-w-3xl mx-auto leading-relaxed">
-                    Nationwide zero-commission logistics matching connecting 28 States & 185+ cities from Origin to Destination.
-                  </p>
-                </div>
-
-                {/* PAN-INDIA HIGHWAY STAGE CONTAINER */}
-                <div className="relative w-full py-12 px-6 sm:px-12 bg-slate-900/90 rounded-[3rem] border border-slate-800 shadow-[0_30px_90px_rgba(0,0,0,0.85)] overflow-hidden">
-                  
-                  {/* Subtle Pan-India Background Grid Telemetry */}
-                  <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#EA580C_1px,transparent_1px)] [background-size:24px_24px]"></div>
-
-                  {/* Top Header inside Stage */}
-                  <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4 pb-6 border-b border-slate-800/80 relative z-20">
-                    <div className="flex items-center space-x-3 text-left">
-                      <div className="w-3.5 h-3.5 rounded-full bg-emerald-500 animate-ping"></div>
-                      <div>
-                        <span className="text-xs font-black uppercase tracking-widest text-[#EA580C]">PAN-INDIA HIGHWAY CORRIDOR</span>
-                        <h3 className="text-xl font-black text-white">28 States & UTs Connected in Real-Time</h3>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2 bg-slate-800/80 px-4 py-2 rounded-xl text-xs font-bold text-slate-300 border border-slate-700">
-                      <Radio className="h-4 w-4 text-[#EA580C] animate-pulse" />
-                      <span>National Highway Progress: <strong className="text-white">{Math.round(scrollProgress * 100)}%</strong></span>
-                    </div>
-                  </div>
-
-                  {/* 3D WINDING HIGHWAY ROAD TRACK WITH CLEAN RADAR PULSE PINS */}
-                  <div ref={roadTrackRef} className="relative w-full mb-12 py-10 bg-[#0B1120] rounded-[2.5rem] border border-slate-800 shadow-inner overflow-visible px-4 sm:px-12">
-                    
-                    {/* Highway Asphalt Texture */}
-                    <div className="absolute inset-x-0 top-1/2 transform -translate-y-1/2 h-36 bg-[#161F33] border-y-4 border-amber-400/40 pointer-events-none rounded-2xl">
-                      <div className="w-full h-full opacity-25 bg-[radial-gradient(#EA580C_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                    </div>
-
-                    {/* SVG Winding Road Path with Integrated Logistics Nodes */}
-                    <svg className="w-full h-64 relative z-10 overflow-visible" viewBox="0 0 1000 220" fill="none">
-                      {/* Outer glow road */}
-                      <path d="M 80 100 C 240 15, 400 185, 600 100 C 760 15, 840 175, 920 100" stroke="#EA580C" strokeWidth="16" strokeOpacity="0.2" strokeLinecap="round" />
-                      {/* Asphalt main road */}
-                      <path d="M 80 100 C 240 15, 400 185, 600 100 C 760 15, 840 175, 920 100" stroke="#1F293D" strokeWidth="10" strokeLinecap="round" />
-                      {/* Animated Dashed Lane Marker */}
-                      <path d="M 80 100 C 240 15, 400 185, 600 100 C 760 15, 840 175, 920 100" stroke="#F59E0B" strokeWidth="2.5" strokeDasharray="10 10" className="road-dash-line" />
-
-                      {/* LOGISTICS NODE 01: CARGO DEMAND */}
-                      <g transform="translate(80, 100)">
-                        <circle r="22" fill="#EA580C" fillOpacity="0.25" className="animate-ping" />
-                        <circle r="14" fill="#EA580C" stroke="#FFFFFF" strokeWidth="2.5" />
-                        <text x="0" y="4" fill="#FFFFFF" fontSize="11" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">01</text>
-                        {/* Node Badge Label */}
-                        <rect x="-50" y="-38" width="100" height="22" fill="#0F172A" rx="6" stroke="#EA580C" strokeWidth="1.5" />
-                        <text x="0" y="-24" fill="#EA580C" fontSize="9" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">CARGO DEMAND</text>
-                      </g>
-
-                      {/* LOGISTICS NODE 02: DIRECT FLEET MATCH */}
-                      <g transform="translate(360, 140)">
-                        <circle r="22" fill="#06B6D4" fillOpacity="0.25" className="animate-ping" />
-                        <circle r="14" fill="#06B6D4" stroke="#FFFFFF" strokeWidth="2.5" />
-                        <text x="0" y="4" fill="#FFFFFF" fontSize="11" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">02</text>
-                        {/* Node Badge Label */}
-                        <rect x="-55" y="24" width="110" height="22" fill="#0F172A" rx="6" stroke="#06B6D4" strokeWidth="1.5" />
-                        <text x="0" y="38" fill="#06B6D4" fontSize="9" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">DIRECT FLEET MATCH</text>
-                      </g>
-
-                      {/* LOGISTICS NODE 03: SAFE QR TRANSIT */}
-                      <g transform="translate(630, 95)">
-                        <circle r="22" fill="#F59E0B" fillOpacity="0.25" className="animate-ping" />
-                        <circle r="14" fill="#F59E0B" stroke="#FFFFFF" strokeWidth="2.5" />
-                        <text x="0" y="4" fill="#FFFFFF" fontSize="11" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">03</text>
-                        {/* Node Badge Label */}
-                        <rect x="-55" y="-38" width="110" height="22" fill="#0F172A" rx="6" stroke="#F59E0B" strokeWidth="1.5" />
-                        <text x="0" y="-24" fill="#F59E0B" fontSize="9" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">SAFE QR TRANSIT</text>
-                      </g>
-
-                      {/* LOGISTICS NODE 04: INSTANT PAYOUT */}
-                      <g transform="translate(920, 100)">
-                        <circle r="22" fill="#10B981" fillOpacity="0.25" className="animate-ping" />
-                        <circle r="14" fill="#10B981" stroke="#FFFFFF" strokeWidth="2.5" />
-                        <text x="0" y="4" fill="#FFFFFF" fontSize="11" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">04</text>
-                        {/* Node Badge Label */}
-                        <rect x="-55" y="24" width="110" height="22" fill="#0F172A" rx="6" stroke="#10B981" strokeWidth="1.5" />
-                        <text x="0" y="38" fill="#10B981" fontSize="9" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">INSTANT PAYOUT</text>
-                      </g>
-
-                      {/* DYNAMIC SCROLL MOVING Y2WAIT TRUCK GRAPHIC (EXACT SVG ROAD ALIGNMENT) */}
-                      <g
-                        transform={`translate(${truckPos.x}, ${truckPos.y}) rotate(${truckPos.angle})`}
-                        className="transition-transform duration-100 ease-out z-30"
-                      >
-                        {/* Headlight Beam */}
-                        <polygon points="25,-10 95,-35 95,35 25,10" fill="url(#headlight-gradient-integrated)" opacity="0.85" />
-
-                        {/* Truck Shadow */}
-                        <rect x="-35" y="-18" width="60" height="36" fill="#000000" opacity="0.5" rx="6" />
-
-                        {/* Truck Trailer Body with Y2WAIT Branding */}
-                        <rect x="-35" y="-16" width="42" height="32" fill="#EA580C" rx="4" stroke="#FFFFFF" strokeWidth="1.5" />
-                        <text x="-28" y="4" fill="#FFFFFF" fontSize="9" fontWeight="900" fontFamily="sans-serif">Y2WAIT</text>
-
-                        {/* Truck Cabin */}
-                        <rect x="7" y="-14" width="18" height="28" fill="#0F172A" rx="4" stroke="#FFFFFF" strokeWidth="1.5" />
-                        <rect x="14" y="-11" width="8" height="22" fill="#38BDF8" opacity="0.8" rx="2" />
-
-                        {/* Wheels */}
-                        <circle cx="-24" cy="-16" r="4" fill="#000000" stroke="#94A3B8" strokeWidth="1.5" />
-                        <circle cx="-24" cy="16" r="4" fill="#000000" stroke="#94A3B8" strokeWidth="1.5" />
-                        <circle cx="-8" cy="-16" r="4" fill="#000000" stroke="#94A3B8" strokeWidth="1.5" />
-                        <circle cx="-8" cy="16" r="4" fill="#000000" stroke="#94A3B8" strokeWidth="1.5" />
-                        <circle cx="16" cy="-14" r="4" fill="#000000" stroke="#94A3B8" strokeWidth="1.5" />
-                        <circle cx="16" cy="14" r="4" fill="#000000" stroke="#94A3B8" strokeWidth="1.5" />
-                      </g>
-
-                      <defs>
-                        <linearGradient id="headlight-gradient-integrated" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#FDE047" stopOpacity="0.9" />
-                          <stop offset="100%" stopColor="#FDE047" stopOpacity="0" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
-
-                  {/* 4 PAN-INDIA LOGISTICS MILESTONE CARDS */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10 text-left">
-                    {[
-                      {
-                        num: '01',
-                        stage: 'OWNER / TRADER',
-                        region: 'Origin Hub',
-                        title: 'Cargo Owner Posts Load',
-                        desc: 'Trader posts commodity weight, origin, destination & target fare anywhere in India with zero broker fee.',
-                        icon: User,
-                        tag: 'PAN-INDIA DEMAND',
-                        color: 'border-orange-500 bg-orange-500/10 text-orange-400',
-                        badgeColor: 'bg-[#EA580C]',
-                        active: scrollProgress >= 0.05
-                      },
-                      {
-                        num: '02',
-                        stage: 'TRANSPORTER',
-                        region: 'Verified Fleet',
-                        title: 'Transporter Accepts Load',
-                        desc: 'Verified outstation truck driver receives instant 100% direct match on Y2Wait Live Radar.',
-                        icon: Truck,
-                        tag: 'DIRECT MATCH',
-                        color: 'border-teal-500 bg-teal-500/10 text-teal-400',
-                        badgeColor: 'bg-teal-600',
-                        active: scrollProgress >= 0.3
-                      },
-                      {
-                        num: '03',
-                        stage: 'LOAD IN-TRANSIT',
-                        region: 'Highway Grid',
-                        title: 'Highway Safe QR Transit',
-                        desc: 'Interstate trip protected with real-time GPS telemetry, police Safe QR & AI hazard alerts across India.',
-                        icon: Radio,
-                        tag: 'GPS TELEMETRY',
-                        color: 'border-amber-500 bg-amber-500/10 text-amber-400',
-                        badgeColor: 'bg-amber-600',
-                        active: scrollProgress >= 0.6
-                      },
-                      {
-                        num: '04',
-                        stage: 'DESTINATION',
-                        region: 'Destination Unload',
-                        title: 'Destination Unload & Pay',
-                        desc: 'Instant digital proof of delivery (POD) verified and direct escrow payout released to driver.',
-                        icon: Award,
-                        tag: 'INSTANT PAYOUT',
-                        color: 'border-emerald-500 bg-emerald-500/10 text-emerald-400',
-                        badgeColor: 'bg-emerald-600',
-                        active: scrollProgress >= 0.85
-                      }
-                    ].map((step: any) => (
-                      <div
-                        key={step.num}
-                        className={`p-8 rounded-[2rem] transition-all duration-500 border flex flex-col justify-between group hover:-translate-y-2 ${
-                          step.active
-                            ? 'bg-slate-900 border-[#EA580C] shadow-[0_15px_40px_rgba(234,88,12,0.3)] scale-[1.02]'
-                            : 'bg-slate-900/60 border-slate-800 opacity-90'
-                        }`}
-                      >
-                        <div>
-                          {/* Card Header */}
-                          <div className="flex items-center justify-between mb-6">
-                            <span className={`h-12 w-12 rounded-2xl flex items-center justify-center font-black text-base shadow-lg ${step.badgeColor} text-white`}>
-                              {step.num}
-                            </span>
-                            <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border ${step.color}`}>
-                              {step.tag}
-                            </span>
-                          </div>
-
-                          {/* Role & Region Badge */}
-                          <div className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1 flex items-center justify-between">
-                            <span className="flex items-center"><step.icon className="h-4 w-4 mr-1.5 text-[#EA580C]" /> {step.stage}</span>
-                            <span className="text-teal-400 font-bold bg-teal-500/10 px-2 py-0.5 rounded">{step.region}</span>
-                          </div>
-
-                          {/* Title & Description */}
-                          <h4 className="font-black text-2xl text-white mb-3 tracking-tight group-hover:text-[#EA580C] transition-colors mt-2">
-                            {step.title}
-                          </h4>
-                          <p className="text-sm text-slate-300 font-medium leading-relaxed">
-                            {step.desc}
-                          </p>
-                        </div>
-
-                        {/* Card Footer Status indicator */}
-                        <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between text-xs font-bold">
-                          <span className={step.active ? 'text-emerald-400 flex items-center' : 'text-slate-500'}>
-                            {step.active ? <CheckCircle2 className="h-4 w-4 mr-1.5 inline animate-pulse" /> : <Clock className="h-4 w-4 mr-1.5 inline" />}
-                            {step.active ? 'Grid Connected' : 'Awaiting Progress'}
-                          </span>
-                          <ChevronRight className="h-5 w-5 text-slate-600 group-hover:text-[#EA580C] group-hover:translate-x-1 transition-all" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* BOTTOM PIPELINE CALLOUT BAR */}
-                  <div className="mt-12 bg-slate-950/80 border border-slate-800 rounded-2xl p-6 flex flex-col md:flex-row justify-between items-center text-left gap-6 relative z-10">
-                    <div className="flex items-center space-x-4">
-                      <div className="bg-[#EA580C] p-3 rounded-xl text-white shadow-lg shrink-0">
-                        <Truck className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <div className="text-white font-black text-lg">Are you a Cargo Owner or Fleet Transporter in India?</div>
-                        <div className="text-xs text-slate-400 font-medium">Join 3,200+ verified partners trading zero-commission loads across 28 Indian States right now.</div>
-                      </div>
-                    </div>
-                    <button type="button" onClick={() => setAuthModal({ open: true, mode: 'register', step: 'role' })} className="bg-[#EA580C] hover:bg-orange-700 text-white font-black px-8 py-3.5 rounded-xl shadow-lg transition-all text-sm shrink-0 cursor-pointer">
-                      Join Pan-India Network ➔
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </section>
-
-            {/* ======================================================== */}
-            {/* SECTION 4: OUR INDUSTRY-EXPLICIT COMPETENCE (TRANSPI SCREENSHOT 5) */}
-            {/* ======================================================== */}
-            <section className="max-w-[1600px] mx-auto px-6 sm:px-12 py-28">
-              <div className="grid lg:grid-cols-12 gap-16 items-center">
-                
-                {/* Left Side: Arch Masked Image of Warehouse Professional */}
-                <div className="lg:col-span-5 relative flex justify-center">
-                  <div className="relative w-full max-w-md h-[520px] overflow-hidden mask-arch border-4 border-slate-100 shadow-2xl bg-slate-200">
-                    <img src="https://images.unsplash.com/photo-1595853035070-59a39fe84de3?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" alt="Logistics Competence" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    <div className="absolute bottom-8 left-8 right-8 text-white text-left">
-                      <div className="text-xs font-black uppercase tracking-widest text-[#EA580C] mb-1">Empowering Fleet Grid</div>
-                      <div className="text-2xl font-black">99.9% On-Time Transit Matching</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Side: Reddish-Orange Competence Card Container */}
-                <div className="lg:col-span-7 text-left space-y-8">
-                  <div className="space-y-3">
-                    <span className="text-[#EA580C] font-black text-xs uppercase tracking-widest bg-orange-50 px-4 py-2 rounded-full border border-orange-100 inline-block">
-                      OUR COMPETENCE
-                    </span>
-                    <h2 className="text-4xl sm:text-5xl font-black text-[#0F172A] tracking-tight">
-                      Our Fleet-Explicit Competence
-                    </h2>
-                    <p className="text-slate-600 text-lg font-medium leading-relaxed">
-                      We offer a unified freight ecosystem with proprietary AI matching, highway police QR clearance, zero-commission loads, and instant reverse bidding.
-                    </p>
-                  </div>
-
-                  {/* Reddish-Orange Container with 2-Column Checkmark Matrix */}
-                  <div className="bg-[#EA580C] text-white p-8 sm:p-12 rounded-[2.5rem] card-asymmetric-lg shadow-2xl space-y-6 relative overflow-hidden">
-                    <div className="absolute -top-10 -right-10 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
-
-                    <div className="grid sm:grid-cols-2 gap-y-4 gap-x-6 text-sm font-bold">
-                      {[
-                        'Direct Matchmaking (No Brokers)',
-                        'Zero Commission Loads',
-                        'Instant Safe Traffic QR Clearance',
-                        'AI Highway Accident Hazard Alert',
-                        'Real-time GPS Command Radar',
-                        'Inter-city Volvo Bus Cargo',
-                        'Corporate Reverse Bidding L1',
-                        'Fleet Mandi Discount Hub'
-                      ].map((item: string) => (
-                        <div key={item} className="flex items-center space-x-3">
-                          <div className="h-6 w-6 rounded-full bg-white text-[#EA580C] flex items-center justify-center shrink-0 shadow-md">
-                            <Check className="h-4 w-4 stroke-[3]" />
-                          </div>
-                          <span className="text-white font-black text-base">{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </section>
-
-            {/* ======================================================== */}
-            {/* IDENTITY SELECTION CARDS */}
-            {/* ======================================================== */}
-            <section className="max-w-[1600px] mx-auto px-6 sm:px-12 text-center space-y-16 mb-32">
-              <div className="max-w-3xl mx-auto space-y-4">
-                <span className="text-[#EA580C] font-black text-xs uppercase tracking-widest bg-orange-50 px-5 py-2 rounded-full border border-orange-100 inline-block">
-                  GET STARTED
-                </span>
-                <h2 className="text-4xl sm:text-5xl font-black text-[#0F172A]">{t("Select Your Identity", "अपनी पहचान चुनें")}</h2>
-                <p className="text-slate-500 font-medium text-lg">Choose your role to access customized logistics tools.</p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                {[
-                  { role: 'driver', icon: <Truck />, title: 'Driver / Fleet', desc: 'List empty trucks' },
-                  { role: 'transporter', icon: <User />, title: 'Transporter', desc: 'Manage trader loads' },
-                  { role: 'trader', icon: <Package />, title: 'Local Trader', desc: 'Ship individual parcels' },
-                  { role: 'corporate', icon: <Building />, title: 'Corporate', desc: 'Bulk advanced bidding' }
-                ].map((item: any) => (
-                  <button type="button" key={item.role} onClick={() => { setSelectedRole(item.role as Role); setAuthModal({ open: true, mode: 'register', step: 'details' }); }}
-                    className="bg-white p-10 rounded-[2.5rem] border border-slate-200 shadow-lg hover:shadow-2xl hover:border-[#EA580C] transition-all flex flex-col items-center text-center group cursor-pointer hover:-translate-y-2">
-                    <div className="h-24 w-24 bg-slate-50 text-slate-500 rounded-[1.5rem] flex items-center justify-center mb-8 border border-slate-100 group-hover:bg-[#EA580C] group-hover:text-white transition-colors shadow-inner [&>svg]:h-12 [&>svg]:w-12">{item.icon}</div>
-                    <h3 className="text-2xl font-black text-slate-900 mb-3">{item.title}</h3>
-                    <p className="text-base text-slate-500 font-medium">{item.desc}</p>
-                  </button>
-                ))}
-              </div>
-            </section>
-
-            {/* ======================================================== */}
-            {/* USER TESTIMONIALS */}
-            {/* ======================================================== */}
-            <section className="py-32 bg-[#0F172A] text-white">
-              <div className="max-w-[1600px] mx-auto px-6 sm:px-12">
-                <div className="text-center mb-20 space-y-4">
-                  <span className="text-[#EA580C] font-black text-xs uppercase tracking-widest bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/15 inline-block">
-                    TESTIMONIALS
-                  </span>
-                  <h2 className="text-4xl sm:text-6xl font-black mb-4 tracking-tight">What Our Users Say</h2>
-                  <p className="text-slate-400 text-xl font-medium max-w-2xl mx-auto">Real experiences from our growing network of partners across India.</p>
-                </div>
-
-                <div className="flex overflow-x-auto space-x-8 pb-10 no-scrollbar snap-x cursor-grab">
-                  {[
-                    { name: "Rajesh K.", role: "Fleet Owner", quote: "Y2Wait's radar completely eliminated my empty return trips. My monthly revenue jumped by 40%. The UI is incredibly easy to use." },
-                    { name: "Suresh Singh", role: "Independent Driver", quote: "The safe QR code feature saved me from endless highway checks. It's the most secure way to haul freight in India right now." },
-                    { name: "Amit Patel", role: "Corporate Manager", quote: "Enterprise reverse bidding helped my manufacturing plant reduce logistics costs drastically. The bidding terminal is flawless." },
-                    { name: "Vikram D.", role: "Transporter", quote: "Bus parcel service is a game changer for urgent small loads. It's fast, reliable, and the escrow fee is very reasonable." }
-                  ].map((testimonial: any, i: number) => (
-                    <div key={i} className="min-w-[360px] sm:min-w-[420px] bg-[#0B0F19] p-10 sm:p-12 rounded-[2.5rem] border border-slate-800 shadow-2xl snap-center flex flex-col justify-between hover:border-[#EA580C] transition-colors group">
-                      <div>
-                        <div className="flex text-[#EA580C] mb-8"><Star className="h-6 w-6 fill-current" /><Star className="h-6 w-6 fill-current" /><Star className="h-6 w-6 fill-current" /><Star className="h-6 w-6 fill-current" /><Star className="h-6 w-6 fill-current" /></div>
-                        <p className="text-lg text-slate-300 italic mb-10 leading-relaxed">"{testimonial.quote}"</p>
-                      </div>
-                      <div className="flex items-center space-x-5 border-t border-slate-800 pt-8">
-                        <div className="h-16 w-16 rounded-full bg-slate-800 border-2 border-[#EA580C] flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform"><User className="text-white h-8 w-8" /></div>
-                        <div className="text-left">
-                          <h4 className="font-black text-white text-xl">{testimonial.name}</h4>
-                          <p className="text-xs text-[#EA580C] font-black uppercase tracking-widest mt-1">{testimonial.role}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* ======================================================== */}
-            {/* PLATFORM FEATURES GRID */}
-            {/* ======================================================== */}
-            <section className="bg-slate-100/80 py-32 px-6">
-              <div className="max-w-[1600px] mx-auto space-y-16">
-                <div className="text-center mb-16 space-y-4">
-                  <span className="text-[#EA580C] font-black text-xs uppercase tracking-widest bg-white px-5 py-2 rounded-full border border-slate-200 shadow-sm inline-block">
-                    CORE TOOLS
-                  </span>
-                  <h2 className="text-4xl sm:text-5xl font-black text-[#0F172A]">Y2Wait Platform Features</h2>
-                  <p className="text-slate-500 text-xl font-medium">Click any module to explore the tools driving modern efficiency.</p>
-                </div>
-                <div className="grid md:grid-cols-2 gap-10">
-                  {platformFeatures.map((b: any) => (
-                    <div key={b.id} onClick={() => { setSelectedFeature(b); handlePageChange('feature_detail'); }} className="bg-white rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-lg hover:shadow-2xl transition-all cursor-pointer group hover:-translate-y-2 text-left">
-                      <div className="h-72 relative overflow-hidden">
-                        <img src={b.url} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="" />
-                        <div className={`absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/50 opacity-90`}></div>
-                        <span className="absolute top-6 left-6 bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-sm">{b.tag}</span>
-                      </div>
-                      <div className="p-10">
-                        <h3 className="text-3xl font-black text-slate-900 mb-4 flex items-center">{b.title} <ArrowRight className="h-6 w-6 ml-auto text-slate-300 group-hover:text-[#EA580C] transition-colors" /></h3>
-                        <p className="text-lg text-slate-600 font-medium leading-relaxed">{b.subtitle}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
+            {/* 11 FINAL CTA & MINIMAL FREIGHT FOOTER */}
+            <FinalCtaFooterSection
+              onPost={() => openFreight('my_listings', 'trader')}
+              onFind={() => openFreight('all')}
+              onCarriers={() => openFreight('all', 'driver')}
+              onShippers={() => openFreight('my_listings', 'trader')}
+              onEnterprise={() => {
+                setActiveModule('corporate');
+                if (isLoggedIn) handlePageChange('dashboard');
+                else {
+                  setSelectedRole('corporate');
+                  setAuthModal({ open: true, mode: 'register', step: 'details' });
+                }
+              }}
+              onTracking={() => {
+                setActiveModule('freight');
+                handlePageChange('dashboard');
+              }}
+              onAbout={() => handlePageChange('about')}
+              onContact={() => handlePageChange('support')}
+              onPrivacy={() => alert('Y2Wait Privacy: Transporter credentials and transactions are protected under the Digital Personal Data Protection Act.')}
+              onTerms={() => alert('Y2Wait Freight Terms: Transparent matchmaking under Indian Carriage by Road Act standards.')}
+            />
           </>
         )}
 
@@ -2750,7 +1595,7 @@ export default function App() {
       </main>
 
       {/* --- MEGA FOOTER --- */}
-      <footer className="bg-[#0B1120] text-slate-400 py-20 px-6 relative z-10 border-t-4 border-[#EA580C] mt-24 text-left">
+      {activeView !== 'landing' && <footer className="bg-[#0B1120] text-slate-400 py-20 px-6 relative z-10 border-t-4 border-[#EA580C] mt-24 text-left">
         <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           <div className="lg:col-span-1 space-y-6">
             <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handlePageChange('landing')}>
@@ -2799,7 +1644,7 @@ export default function App() {
             <span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span>
           </div>
         </div>
-      </footer>
+      </footer>}
 
     </div>
   );

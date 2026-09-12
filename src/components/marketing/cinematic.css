@@ -1,0 +1,177 @@
+/* ===================================================
+   10 / CINEMATIC BREAK STYLING
+   Film interlude / full bleed breathing room
+   =================================================== */
+
+.cinematic-break-scene {
+  position: relative;
+  min-height: 850px;
+  height: 100svh;
+  max-height: 1100px;
+  padding: 60px 5% 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: clip;
+  background: #090909;
+  color: #f5f3ef;
+  isolation: isolate;
+}
+
+/* Full bleed photo background with slow parallax translation */
+.cinematic-backdrop {
+  position: absolute;
+  inset: -40px -20px;
+  z-index: 0;
+  pointer-events: none;
+  transform: translateY(calc(var(--travel, 0px) * -0.6));
+  transition: transform 0.1s linear;
+}
+.cinematic-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.65) contrast(1.1);
+}
+
+/* Cinematic film grain & vignette shading */
+.cinematic-film-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    #090909ee 0%,
+    rgba(9, 9, 9, 0.4) 30%,
+    rgba(9, 9, 9, 0.5) 70%,
+    #090909f0 100%
+  );
+  pointer-events: none;
+}
+
+/* Single Travelling Orange Route Thread */
+.cinematic-route-thread {
+  position: absolute;
+  top: 52%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.cinematic-route-thread svg {
+  width: 100%;
+  height: 100%;
+}
+.cinematic-lead-wire {
+  stroke: #ffffff15;
+  stroke-width: 1;
+}
+.cinematic-active-pulse {
+  stroke: #de622b;
+  stroke-width: 2;
+  stroke-dasharray: 200 400;
+  animation: pulseRouteTravel 12s linear infinite;
+}
+@keyframes pulseRouteTravel {
+  0% {
+    stroke-dashoffset: 600;
+  }
+  100% {
+    stroke-dashoffset: -600;
+  }
+}
+
+/* Top Stamp */
+.cinematic-top-stamp {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(245, 243, 239, 0.15);
+  padding-bottom: 16px;
+  font-size: 8px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #a6a29a;
+  text-transform: uppercase;
+}
+.cinematic-top-stamp b {
+  color: #de622b;
+  margin-right: 8px;
+}
+
+/* Giant Film Title Typography */
+.cinematic-title-wrap {
+  position: relative;
+  z-index: 3;
+  max-width: 1100px;
+  margin: auto 0;
+}
+.cinematic-kicker {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  font-weight: 700;
+  color: #de622b;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.cinematic-title-wrap h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(44px, 7.8vw, 120px);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+  color: #f5f3ef;
+  text-transform: uppercase;
+}
+.cinematic-title-wrap h2 span {
+  color: #8c8880;
+}
+
+/* Bottom Atmosphere Bar */
+.cinematic-bottom-bar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid rgba(245, 243, 239, 0.15);
+  padding-top: 20px;
+}
+.cinematic-subline {
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #f5f3ef;
+}
+.cinematic-subline span {
+  color: #de622b;
+}
+.cinematic-telemetry {
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: #8c8880;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .cinematic-break-scene {
+    min-height: 640px;
+    padding: 36px 6% 32px;
+  }
+  .cinematic-title-wrap h2 {
+    font-size: 11vw;
+    line-height: 1.05;
+  }
+  .cinematic-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

@@ -1,0 +1,134 @@
+.freight-story {
+  --story-orange: #de622b;
+  --story-paper: #f5f3ef;
+  --story-ink: #090909;
+  --progress: 0;
+  position: relative;
+  color: var(--story-paper);
+  background: var(--story-ink);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.freight-story h2, .freight-story h3, .freight-story p { margin: 0; }
+.freight-story h2 { font-family: 'Sora', sans-serif; font-weight: 800; letter-spacing: -.07em; }
+.freight-story em { font-style: normal; color: var(--story-orange); }
+.story-chapter, .story-bottom-rule { display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: 9px; letter-spacing: 1.6px; font-weight: 600; }
+.story-chapter b { color: var(--story-orange); margin-right: 18px; font-weight: 600; }
+.story-chapter > span:last-child { color: #96948e; font-size: 8px; }
+.story-bottom-rule { border-top: 1px solid #ffffff24; padding-top: 24px; color: #999790; font-size: 8px; }
+.story-bottom-rule b { margin-left: 18px; color: var(--story-orange); font-size: 18px; font-weight: 400; }
+
+/* The dark bottom of the approved hero continues directly into this scene. */
+.freight-hero + .network-scene { padding: 74px 4% 32px; }
+.network-scene { min-height: 950px; padding: 74px 4% 32px; overflow: clip; background: linear-gradient(#0c0c0b, #090909 22%); }
+.network-layout { position: relative; min-height: 750px; display: flex; align-items: center; }
+.network-editorial { position: relative; z-index: 2; width: 47%; padding: 55px 0 65px; pointer-events: none; }
+.network-editorial h2 { font-size: clamp(78px, 9.7vw, 164px); line-height: .99; }
+.network-editorial h2 em { color: var(--story-paper); }
+.network-editorial p { color: #a6a49f; font-size: 15px; line-height: 1.9; margin-top: 38px; letter-spacing: -.25px; }
+.story-coordinate { display: flex; align-items: center; gap: 13px; font-size: 7px; letter-spacing: 1.1px; margin-top: 33px; color: #85847e; }
+.story-coordinate i { display: inline-block; width: 4px; height: 4px; background: var(--story-orange); border-radius: 50%; }
+.network-atlas { position: absolute; width: 61%; height: 100%; left: 32%; top: 0; opacity: .95; mask-image: linear-gradient(90deg, transparent, black 13%, black 90%, transparent); }
+.network-atlas svg { width: 100%; height: 100%; overflow: visible; }
+.network-survey { stroke: #e8e5df; stroke-width: .6; opacity: .08; }
+.network-terrain { stroke: #b1ada3; stroke-width: .8; stroke-dasharray: 2 5; fill: #f5f3ef; fill-opacity: .018; opacity: .25; }
+.network-route-base { stroke: #f5f3ef; stroke-width: .8; opacity: .13; }
+.network-route-lit { stroke: #de622b; stroke-width: 1.5; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.network-city-ring { fill: #de622b; fill-opacity: .08; stroke: #de622b; stroke-width: .6; stroke-opacity: .5; }
+.network-city text { fill: #b8b4ab; font-size: 7px; font-weight: 600; letter-spacing: 1px; }
+.network-map-note { fill: #706e67; font-size: 7px; letter-spacing: 1.4px; }
+.network-numbers { margin: 0 0 0 auto; position: relative; z-index: 3; width: 17%; align-self: center; }
+.network-numbers > div { display: flex; flex-direction: column-reverse; padding: 22px 0 28px; border-bottom: 1px solid #ffffff24; }
+.network-numbers dd { margin: 0; font-size: clamp(48px, 5vw, 85px); line-height: 1.15; font-weight: 500; letter-spacing: -.065em; }
+.network-numbers dd span { font-size: 22px; color: var(--story-orange); vertical-align: top; margin: 10px 0 0 14px; display: inline-block; }
+.network-numbers dt { font-size: 8px; letter-spacing: 1.7px; color: #bab7af; margin-top: 6px; }
+.network-numbers .network-data-state { font-size: 6px; letter-spacing: 1.1px; color: #a39e95; margin-top: 20px; line-height: 1.7; }
+
+.empty-scene { min-height: 920px; height: 112svh; max-height: 1250px; padding: 52px 4% 32px; isolation: isolate; overflow: clip; display: flex; flex-direction: column; }
+.empty-road { position: absolute; inset: -40px 0; z-index: -3; transform: translateY(var(--travel, 0px)); }
+.empty-road img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.empty-shade { position: absolute; inset: 0; z-index: -2; background: linear-gradient(#090909 0%, #09090920 25%, transparent 48%, #09090975 83%, #090909 100%), linear-gradient(90deg, #09090945, transparent 70%); }
+.empty-scene h2 { font-size: clamp(55px, 7.8vw, 132px); line-height: 1.08; margin-top: clamp(105px, 14vh, 180px); }
+.empty-scene h2 > span { display: block; --reveal: 0; opacity: calc(.18 + var(--reveal) * .82); transform: translateY(calc((1 - var(--reveal)) * 20px)); }
+.empty-bottom { display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; padding: 60px 0 46px; }
+.empty-bottom > p { font-size: 18px; line-height: 1.65; color: #d5d1c9; letter-spacing: -.4px; }
+.empty-losses { display: flex; gap: 34px; font-size: 10px; letter-spacing: 1px; }
+.empty-losses span { border-top: 1px solid #ffffff50; padding-top: 17px; }
+.empty-losses b { display: block; color: #a7a39b; font-size: 8px; margin-bottom: 12px; font-weight: 400; }
+
+.matching-scroll { background: var(--story-paper); color: var(--story-ink); min-height: 240svh; }
+.matching-stage { position: sticky; top: 74px; min-height: 700px; height: calc(100svh - 74px); padding: 37px 4% 25px; display: flex; flex-direction: column; overflow: clip; }
+.matching-stage .story-chapter > span:last-child { color: #707070; }
+.matching-heading { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 32px; gap: 25px; }
+.matching-heading h2 { font-size: clamp(34px, 4.7vw, 80px); line-height: 1.05; }
+.matching-heading h2 > span { color: #a6a29a; }
+.matching-heading p { font-size: 11px; color: #707070; line-height: 1.75; min-width: 205px; }
+.matching-heading strong { color: #090909; font-weight: 500; }
+.matching-pair { position: relative; display: grid; grid-template-columns: 1fr 18% 1fr; align-items: center; gap: 0; margin-top: 34px; flex: 1; min-height: 290px; max-height: 390px; }
+.matching-load, .matching-truck { min-width: 0; align-self: stretch; transition: transform .15s linear; }
+.matching-load { transform: translateX(calc(var(--progress) * 12px)); }
+.matching-truck { transform: translateX(calc(var(--progress) * -12px)); }
+.matching-asset-label { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #09090980; padding: 14px 0 0; font-size: 8px; letter-spacing: 1px; font-weight: 600; }
+.matching-asset-label > span:last-child { color: #737069; font-size: 7px; }
+.matching-asset-label i { display: inline-block; width: 4px; height: 4px; background: var(--story-orange); border-radius: 50%; margin-right: 5px; }
+.matching-load h3 { font-family: 'Sora', sans-serif; font-size: clamp(40px, 5.9vw, 98px); font-weight: 600; line-height: 1.03; letter-spacing: -.065em; margin-top: 21px; }
+.matching-load h3 svg { width: 17%; height: auto; display: inline-block; margin-left: 5%; color: var(--story-orange); stroke-width: 1; }
+.matching-specs { display: flex; justify-content: space-between; gap: 15px; margin: 23px 0 0; border-top: 1px solid #09090924; padding-top: 13px; }
+.matching-specs dt { font-size: 7px; letter-spacing: 1px; color: #707070; }
+.matching-specs dd { font-size: clamp(15px, 1.7vw, 28px); margin: 8px 0 0; font-weight: 500; letter-spacing: -.7px; }
+.matching-specs dd > span { font-size: 12px; margin-left: 3px; }
+.matching-link { width: 100%; padding: 0 8%; text-align: center; }
+.matching-link > span:first-child { font-size: 10px; font-weight: 800; letter-spacing: -.6px; }
+.matching-link svg { width: 100%; height: 80px; }
+.matching-line-base { stroke: #09090930; stroke-width: 1; }
+.matching-line-active { stroke: var(--story-orange); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: calc(1 - min(1, var(--progress) * 1.5)); }
+.matching-signal { font-size: 7px; letter-spacing: 1px; color: #707070; }
+.matching-truck-photo { position: relative; overflow: hidden; margin-top: 14px; height: calc(100% - 100px); min-height: 170px; max-height: 245px; background: #121619; }
+.matching-truck-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
+.matching-truck-photo > span { position: absolute; bottom: 10px; left: 12px; color: white; font-size: 7px; letter-spacing: 1px; }
+.matching-truck-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 11px; gap: 10px; }
+.matching-truck-meta h3 { font-size: 17px; font-weight: 600; letter-spacing: -.5px; }
+.matching-truck-meta > span { font-size: 7px; letter-spacing: 1px; color: #707070; }
+.matching-result { display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid #09090924; margin-top: auto; padding: 22px 0; }
+.matching-status { font-size: clamp(20px, 2.8vw, 46px); font-weight: 600; letter-spacing: -.055em; }
+.match-connect, .match-found { display: none; }
+[data-stage='connecting'] .match-search, [data-stage='matched'] .match-search { display: none; }
+[data-stage='connecting'] .match-connect { display: inline; }
+[data-stage='matched'] .match-found { display: flex; gap: 13px; align-items: center; }
+.match-found svg { width: 36px; height: 36px; stroke: var(--story-orange); stroke-width: 1.5; }
+.matching-result button { cursor: pointer; display: flex; align-items: center; gap: 24px; padding: 14px 0; font-size: 8px; font-weight: 700; letter-spacing: 1px; border-bottom: 1px solid #090909; }
+.matching-result button:hover { color: var(--story-orange); border-color: var(--story-orange); }
+.matching-result button:focus-visible { outline: 2px solid var(--story-orange); outline-offset: 5px; }
+.matching-timeline { position: relative; display: flex; justify-content: space-between; border-top: 1px solid #09090926; padding-top: 15px; color: #707070; font-size: 7px; letter-spacing: 1px; }
+.matching-timeline i { position: absolute; top: -1px; left: 0; width: calc(var(--progress) * 100%); height: 2px; background: var(--story-orange); }
+[data-stage='matched'] .matching-timeline > span:last-of-type { color: #a64419; }
+
+@media (min-width: 1700px) { .network-scene { min-height: 1050px; }.network-layout { min-height: 850px; }.matching-stage { padding-top: 55px; }.matching-heading { margin-top: 45px; }.matching-pair { max-height: 470px; }.matching-truck-photo { max-height: 320px; } }
+@media (max-width: 1080px) {
+  .network-scene { min-height: 850px; }.network-layout { min-height: 690px; }.network-editorial h2 { font-size: 10vw; }.network-atlas { left: 29%; width: 69%; }.network-numbers { width: 17%; }.network-numbers dd { font-size: 5.7vw; }.network-editorial p { font-size: 12px; }.network-numbers dt { font-size: 7px; }
+  .empty-scene { min-height: 830px; }.empty-scene h2 { font-size: 8vw; }.empty-losses { gap: 20px; font-size: 8px; }
+  .matching-heading p { font-size: 10px; min-width: 165px; }.matching-pair { grid-template-columns: 1fr 14% 1fr; }.matching-asset-label { font-size: 7px; }.matching-asset-label > span:last-child { font-size: 6px; }.matching-truck-meta h3 { font-size: 13px; }.matching-truck-meta > span { font-size: 6px; }
+}
+@media (max-width: 640px) {
+  .story-chapter { font-size: 7px; letter-spacing: 1px; }.story-chapter > span:last-child { font-size: 6px; max-width: 45%; text-align: right; line-height: 1.7; }.story-chapter b { margin-right: 8px; }
+  .freight-hero + .network-scene, .network-scene { padding: 50px 6% 25px; min-height: 970px; }
+  .network-layout { min-height: 810px; display: block; }.network-editorial { padding: 65px 0 0; width: 100%; }.network-editorial h2 { font-size: 19.5vw; line-height: 1.02; }.network-editorial p { margin-top: 25px; font-size: 12px; }.story-coordinate { font-size: 6px; margin-top: 23px; }
+  .network-atlas { top: 300px; left: 13%; width: 100%; height: 500px; opacity: .8; }.network-numbers { width: 100%; display: flex; position: absolute; bottom: 0; gap: 20px; padding-bottom: 35px; }.network-numbers > div { flex: 1; padding: 0 0 15px; }.network-numbers dd { font-size: 40px; }.network-numbers dd span { display: none; }.network-numbers dt { font-size: 6px; letter-spacing: .8px; }.network-numbers .network-data-state { position: absolute; bottom: 0; font-size: 6px; }
+  .story-bottom-rule { font-size: 6px; letter-spacing: .8px; line-height: 1.5; }.story-bottom-rule > span:last-child { text-align: right; max-width: 46%; }.story-bottom-rule b { margin-left: 6px; font-size: 13px; }
+  .empty-scene { padding: 35px 6% 26px; min-height: 830px; height: 105svh; }.empty-road img { object-position: 67% center; }.empty-scene h2 { font-size: 12.4vw; margin-top: 145px; line-height: 1.14; }.empty-scene h2 > span:first-child { max-width: 90%; }.empty-bottom { display: block; padding: 40px 0 30px; }.empty-bottom > p { font-size: 14px; }.empty-losses { display: flex; justify-content: space-between; gap: 14px; margin-top: 27px; font-size: 7px; letter-spacing: .5px; }.empty-losses span { flex: 1; padding-top: 12px; }.empty-losses b { font-size: 6px; margin-bottom: 7px; }
+  .matching-scroll { min-height: 230svh; }.matching-stage { padding: 25px 6% 20px; min-height: 715px; }.matching-heading { margin-top: 30px; display: block; }.matching-heading h2 { font-size: 8.4vw; line-height: 1.15; }.matching-heading p { font-size: 10px; margin-top: 16px; }.matching-heading p br { display: none; }.matching-heading p strong { display: block; }
+  .matching-pair { grid-template-columns: 1fr 22px 1fr; margin-top: 24px; min-height: 290px; max-height: 330px; align-items: stretch; }.matching-load,.matching-truck { transform: none; }.matching-asset-label { flex-direction: column; font-size: 7px; gap: 8px; }.matching-load h3 { font-size: 9vw; margin-top: 22px; }.matching-load h3 svg { width: 16%; margin-left: 2%; }.matching-specs { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 5px; }.matching-specs > div:last-child { grid-column: 1 / -1; }.matching-specs dt { font-size: 6px; }.matching-specs dd { font-size: 16px; margin-top: 5px; }.matching-specs div:nth-child(2) dd { font-size: 11px; }.matching-truck-photo { height: 155px; min-height: 0; margin-top: 20px; }.matching-truck-photo img { object-fit: cover; object-position: 65% center; }.matching-truck-photo > span { font-size: 5px; left: 7px; }.matching-truck-meta { display: block; padding-top: 12px; }.matching-truck-meta h3 { font-size: 11px; }.matching-truck-meta > span { font-size: 6px; margin-top: 7px; display: block; }
+  .matching-link { position: absolute; left: 36%; top: 68px; width: 28%; padding: 0; z-index: 2; }.matching-link > span { display: none; }.matching-link svg { height: 45px; }.matching-result { padding: 15px 0; display: block; }.matching-status { font-size: 24px; min-height: 35px; }.match-found svg { width: 25px; height: 25px; }.matching-result button { margin-top: 8px; font-size: 7px; padding: 9px 0; gap: 14px; }.matching-timeline { font-size: 6px; padding-top: 12px; }
+}
+@media (max-height: 760px) and (min-width: 641px) { .matching-stage { min-height: 650px; padding-top: 20px; }.matching-heading { margin-top: 20px; }.matching-heading h2 { font-size: 4vw; }.matching-pair { margin-top: 22px; min-height: 260px; }.matching-truck-photo { max-height: 180px; }.matching-load h3 { font-size: 5vw; }.matching-result { padding: 14px 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .freight-story *, .freight-story *::before, .freight-story *::after { transition: none !important; animation: none !important; }
+  .empty-road, .empty-scene h2 > span, .matching-load, .matching-truck { transform: none !important; }
+  .empty-scene h2 > span { opacity: 1 !important; }
+  .network-route-lit, .matching-line-active { stroke-dashoffset: 0 !important; }
+  .matching-scroll { min-height: 0; }.matching-stage { position: relative; top: 0; height: auto; min-height: 800px; }
+}
+@media (max-height: 789px) and (max-width: 640px) { .matching-stage { position: relative; top: 0; min-height: 760px; height: auto; }.matching-scroll { min-height: 0; }.matching-scroll .match-search, .matching-scroll .match-connect { display: none; }.matching-scroll .match-found { display: flex; align-items: center; gap: 12px; }.matching-line-active { stroke-dashoffset: 0; }.matching-timeline i { width: 100%; } }
+.matching-load{grid-column:1}.matching-truck{grid-column:3}
+
+.freight-story h2{word-spacing:.07em}.empty-road img{object-position:85% center}
+
